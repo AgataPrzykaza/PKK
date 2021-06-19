@@ -50,7 +50,7 @@ public:
 	void Show();
 	void Add(vector<Przedmiot*>& lista);
 	void Delete(vector<Przedmiot*>& lista);
-	void Modify(Przedmiot*& book);
+	void Modify(Przedmiot* &book);
 
 	friend istream& operator>>(istream& s, Ksiazka &k);
 	friend ostream& operator<<(ostream& s, Ksiazka &k);
@@ -94,12 +94,35 @@ public:
 	Konto(int id, string name, string email, string haslo) :User(id, name, email, haslo) {};
 	Konto() :User(0, "", "", "") {};
 	void MyBooks(User person, vector< pair<User, vector<Przedmiot*>>>& issued);
-	void Issue(User *person, Przedmiot* book, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>&);
+	void Issue(User *person, Przedmiot* book, vector< pair<User, vector<Przedmiot*>>> &issued, vector<Przedmiot*>&);
 	//void Admin();
-	void Modify(User& person, map<User, vector<Przedmiot*>>& issued, vector<User*>&);
+	void Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 	void Delete(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 	void Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 };
 
+class Menu
+{
+public:
+	Menu();
+	void Login();
+	void Register();
+	void Search();
+	void Admin();
+	void MyKonto();
+	void Book();
+	void Game();
+	void Multimedia();
+};
+class Searching
+{
+public:
+	Searching();
+	void SearchByTitle();
+	void SearchByAutor();
+	void SearchByYear();
+	void SearchByGenre();
+
+};
 int IdMaker(int);
 int LastId(vector<User*>& users);

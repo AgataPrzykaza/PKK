@@ -44,53 +44,66 @@ baza PrzedmiotPeopleGet(const string& fileName);
 
 int main()
 {
-	
-    vector<User*> u= PeopleGet("users.txt");
-    /*for (int i=0;i<u.size();i++)
-    {
-        cout << *u[i]<<endl;
-    }
-
-    PeopleSave("save.txt", u);
+    baza zbior ;
+    vector<Przedmiot*> ksiaz=PrzedmiotGet("przedmioty.txt");
+    vector<User*> u = PeopleGet("users.txt");
+    //User j(91, "kot na plot", "ko@.pl", "ko");
+    pair<User, vector<Przedmiot*>> cos{ *u[0],{ksiaz[0],ksiaz[2]} };
+    pair<User, vector<Przedmiot*>> cos2{ *u[1],{ksiaz[1],ksiaz[3]} };
+    zbior.push_back(cos);
+    zbior.push_back(cos2);
+    Konto ja;
+    ja.Issue(u[4], ksiaz[3], zbior, ksiaz);
     
-    Ksiazka o("K0909", "ws", "qs", 2, "kol", 1);
-    Przedmiot* k = new Ksiazka;
-    *k = o;
-    ksiaz.push_back(k);
+    ja.MyBooks(*u[4], zbior);
+    ja.Modify(*u[4], zbior, u);
+    cout << *u[4];
+    cout << zbior[zbior.size() - 1].first;
+    
+    
+    /*Ksiazka k; 
+    k.Modify(ksiaz[1]);
+    ksiaz[1]->Show();
+    k= *(dynamic_cast<Ksiazka*>(ksiaz[1]));
+    k.Show();*/
+    
+    
+    //PrzedmiotSave("buff.txt", ksiaz);
+    //PrzedmiotPeopleSave(zbior, "buff2.txt");
+    //zbior= PrzedmiotPeopleGet("save.txt");
+    //ksiaz = PrzedmiotGet("przedmioty.txt");
+   // pair<User, vector<Przedmiot*>> p{*u[0],ksiaz};
+    
+    //zbior.push_back(p);
+    
+ 
+   // Konto Jarek;
+    //Jarek.Add(zbior, u);
+   // 
+    //Jarek.Issue(&j, ksiaz[0], zbior, ksiaz);
 
-    Ksiazka op("K77777", "ws", "qs", 2, "kol", 1);
-    Przedmiot* kp = &op;
-    ksiaz.push_back(kp);
+   // PrzedmiotPeopleSave(zbior, "save.txt");
 
     
-    pair<User, vector<Przedmiot*>> p{*u[0],ksiaz};
-    ksiaz.push_back(k);
-    pair<User, vector<Przedmiot*>> l{ *u[1],ksiaz };
+
     
-    PrzedmiotSave("save.txt", ksiaz);
+    //k.Modify(ksiaz[0]);
+    //k.Add(ksiaz);
+    //k.Delete(ksiaz);
+   // ksiaz[ksiaz.size() - 1]->Show();
+    //PrzedmiotSave("save.txt", ksiaz);
     
-    zbior.push_back(p);
-    zbior.push_back(l);*/
+    
 
-    baza zbior;
-    vector<Przedmiot*> ksiaz;
-    ksiaz = PrzedmiotGet("przedmioty.txt");
-    /*pair<User, vector<Przedmiot*>> lp{ *u[1],ksiaz };
-    zbior.push_back(lp);
+   // PrzedmiotPeopleSave(zbior, "save.txt");
+   //PeopleSave("users.txt", u);
+    
 
-    PrzedmiotPeopleSave(zbior, "save.txt");*/
-
-    zbior = PrzedmiotPeopleGet("save.txt");
-
-    Ksiazka k;
-    k.Add(ksiaz);
-
-    ksiaz[ksiaz.size() - 1]->Show();
 
     //GETLINE W NAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-    /*PrzedmiotPeopleSave(zbior, "test.txt");*/
+    
 }
 
 vector<User*> PeopleGet(const string& fileName)  // read people file
@@ -138,7 +151,7 @@ void PrzedmiotSave(const string& exitFile, vector<Przedmiot*>books)// save przed
     {
         Ksiazka k=*(dynamic_cast<Ksiazka*>  (books[i]));
         
-        plik << k;
+        plik << k << endl;
 
     }
     plik.close();

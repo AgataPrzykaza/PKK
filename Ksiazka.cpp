@@ -11,23 +11,26 @@ string Ksiazka::Genre()
 
 void Ksiazka::Show() //ok
 {
-	cout << this->Id() << ": " << "' " << this->Title() << " ' " << this->Autor() << endl;
-	cout << "Rok wydania: " << this->Year() << " Gatunek: " << genre<<" |";
+	cout << "Ksiazka - ";
+	cout << this->Id() << ": " << " " << this->Title() << "  " <<" "<< this->Autor() <<" "<< endl;
+	cout <<"\t" "Rok wydania: " << this->Year() << " Gatunek: " << genre<<" |";
 	if (this->Available() == 1)
 		cout << "Dostepna!" << endl;
 	else
 		cout << "Niedostepna!" << endl;
 }
-void Ksiazka::Add(vector<Przedmiot*>& lista)
+void Ksiazka::Add(vector<Przedmiot*>& lista)	//ok
 {
 	string title, autor, genre, id;
 	int year;
 
 	cout << "Podaj dane ksiazki " << endl;
 	cout << "tytul: ";
-	cin >> title;
+	//cin >> title;
+	getline(cin, title);
 	cout << "autor: ";
-	cin >> autor;
+	getline(cin, autor);
+	//cin >> autor;
 	cout << "id:";
 	cin >> id;
 	cout << "rok wydania: ";
@@ -54,14 +57,14 @@ void Ksiazka::Delete(vector<Przedmiot*>& lista)
 
 	}
 }
-void Ksiazka::Modify(Przedmiot*& book)
+void Ksiazka::Modify(Przedmiot* &book)
 {
 	Ksiazka* k = dynamic_cast<Ksiazka*> (book);
 	int option, l;
 	string s;
 	cout << "Zmienic: " << endl;
-	cout << "1.Id " << endl << "2.Tytul" << "3.Autor" << endl << "4.Rok wydania"
-		<< endl << "5.Gatunek" << endl << "6.Dostepnosc";
+	cout << "1.Id " << endl << "2.Tytul" <<endl<< "3.Autor" << endl << "4.Rok wydania"
+		<< endl << "5.Gatunek" << endl << "6.Dostepnosc"<<endl;
 	cin >> option;
 	switch (option)
 	{
@@ -73,16 +76,27 @@ void Ksiazka::Modify(Przedmiot*& book)
 
 	}
 	case 2:
-	{
-		cout << "Podaj nowy tytul ksiazki:";
+	{	string dod;
+		cout << "Podaj nowy tytul ksiazki:"<<endl;
 		cin >> s;
+		while (s[s.size() - 1] != '"')
+		{	
+			cin >> dod;
+			s = s += " " + dod;
+		}
 		k->setTitle(s);
 		break;
 	}
 	case 3:
-	{
+	{	string dod;
 		cout << "Podaj nowego autora ksiazki:";
 		cin >> s;
+		while (s[s.size() - 1] != ',')
+		{
+			cin >> dod;
+			s = s += " " + dod;
+		}
+		//getline(cin, s);
 		k->setAutor(s);
 		break;
 	}
@@ -114,10 +128,24 @@ void Ksiazka::Modify(Przedmiot*& book)
 istream& operator>>(istream& s, Ksiazka& k)
 {
 	
-	string id, title, autor, genre;
+	string id, title, autor, genre,dane;
 	int year;
 	bool available;
-	s >> id >> title >> autor >> year >> genre >> available;
+
+	s >> id;
+	s >> title;
+	while(title[title.size()-1]!='"')
+	{	s >> dane;
+		title = title +" "+dane;
+
+	}
+	s >> autor;
+	/*while (autor[autor.size()- 1] != '"')
+	{
+		s >> dane;
+		autor = autor +" "+dane;
+	}*/
+	s>> year >> genre >> available;
 	k.setID(id); k.setTitle(title); k.setAutor(autor); k.setYear(year); k.genre = genre;
 	k.setAvailable(available);
 	return s;
