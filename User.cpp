@@ -51,7 +51,20 @@ bool User::CheckEmail(string email, vector<User*> lista)
 	}
 	return true;							//email free, 
 }
-
+bool User::CheckHaslo(string haslo,string email,vector<User*> lista)
+{
+	for (auto i : lista)
+	{
+		if (email == i->getEmail())
+		{
+			if (i->getHaslo() == haslo)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
 istream& operator>>(istream& s, User &u)
 {	string tmp;
 	s >> u.IdUser >>u.name>>tmp >> u.email >> u.haslo;
@@ -118,27 +131,41 @@ void Konto::Issue(User* person, Przedmiot* book, vector< pair<User,vector<Przedm
 
 }
 
-void Konto::Delete(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
+void Konto::Delete(int person, baza& issued, vector<User*>& users) //ok
 {
 	int cnt=0;										//error if for(int i=0;
+	
+	for (auto l : issued)
+	{
+		if (l.first.getID() == person)
+		{			
+			if (l.second.size() != 0)
+			{
+				cout << "Uzytkownik ma nie oddane ksiazki, nie mozna usunac !!!"<<endl;
+				cout << "Wcisnij klawisz by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+				
+			}
+			issued.erase(issued.begin() + cnt);
+		}
+	}
+		cnt = 0;
 	for (auto i:users)
 	{
 		
-		if (i->getID() == person.getID())
+		if (i->getID() == person)
 		{
 			users.erase(users.begin() + cnt);
 			break;
 		}
 		cnt++;
 	}
-	cnt = 0;
-	for (auto l : issued)
-	{
-		if (l.first.getID() == person.getID())
-		{
-			issued.erase(issued.begin() + cnt);
-		}
-	}
+
+	
+	
 
 	
 }
@@ -202,6 +229,8 @@ void Konto::Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued
 
 		break;
 	}
+	default:
+		break;
 	}
 
 	
@@ -229,7 +258,7 @@ void Konto::Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued
 
 }
 
-void Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
+Konto Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
 {
 	int id;
 
@@ -257,7 +286,8 @@ void Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& 
 	issued.push_back(para);
 	users.push_back(newUser);
 
-	
+	Konto nowy(id, name, email, haslo);
+	return nowy ;
 }
 int IdMaker(int latest)
 {

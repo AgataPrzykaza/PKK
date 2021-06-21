@@ -5,7 +5,9 @@
 
 #include"Nagłówek.h"
 using namespace std;
+
 typedef vector< pair<User, vector<Przedmiot*>>> baza;
+
 vector<User*> PeopleGet(const string& fileName);
 void PeopleSave(const string& exitFile, vector<User*> users);
 void PrzedmiotSave(const string& exitFile, vector<Przedmiot*>books);
@@ -50,16 +52,30 @@ int main()
     //User j(91, "kot na plot", "ko@.pl", "ko");
     pair<User, vector<Przedmiot*>> cos{ *u[0],{ksiaz[0],ksiaz[2]} };
     pair<User, vector<Przedmiot*>> cos2{ *u[1],{ksiaz[1],ksiaz[3]} };
-    zbior.push_back(cos);
+   /* zbior.push_back(cos);
     zbior.push_back(cos2);
     Konto ja;
     ja.Issue(u[4], ksiaz[3], zbior, ksiaz);
-    
     ja.MyBooks(*u[4], zbior);
     ja.Modify(*u[4], zbior, u);
     cout << *u[4];
-    cout << zbior[zbior.size() - 1].first;
+    cout << zbior[zbior.size() - 1].first;*/
+
+
     
+    if (cin.get())
+    {
+        cout << "ah tak";
+    }
+    ;
+
+   
+
+
+
+    
+    /*zbior = PrzedmiotPeopleGet("buff2.txt");
+    PrzedmiotPeopleSave(zbior, "buff.txt");*/
     
     /*Ksiazka k; 
     k.Modify(ksiaz[1]);
@@ -76,9 +92,12 @@ int main()
     
     //zbior.push_back(p);
     
- 
-   // Konto Jarek;
-    //Jarek.Add(zbior, u);
+    
+    Konto Jarek;
+  //  Jarek.Add(zbior, u);
+   
+    /*Jarek.Delete(u[u.size() - 1]->getID(), zbior, u);
+    cout << u.size();*/
    // 
     //Jarek.Issue(&j, ksiaz[0], zbior, ksiaz);
 
@@ -254,15 +273,15 @@ vector<Przedmiot*> PrzedmiotGet(const string& fileName) // read from przedmiot f
 baza PrzedmiotPeopleGet(const string& exitFile)
 {
     ifstream plik(exitFile);
-    string s;
+    string s,g;
     string z;
     vector<Przedmiot*> zbior{};
     User man;
     baza tabela;
     if (plik.good())
     {
-        getline(plik, s);
-        stringstream person(s);
+        getline(plik, g);
+        stringstream person(g);
         person >> man;
         while (getline(plik, s))
         {
@@ -280,7 +299,7 @@ baza PrzedmiotPeopleGet(const string& exitFile)
                 {
 
                     Ksiazka* k = new Ksiazka;
-                    stringstream ss(s);
+                    
                     ss1 >> *k;
                     zbior.push_back(k);
 
@@ -290,7 +309,7 @@ baza PrzedmiotPeopleGet(const string& exitFile)
                     /*if (z[0]=='G')
                     {
                          Gra* g = new Gra;
-                        stringstream ss(s);
+                        
                     ss1 >>*g;
                     zbior.push_back(g);
 
@@ -298,7 +317,7 @@ baza PrzedmiotPeopleGet(const string& exitFile)
                     /*if (z[0]=='C' || z[0]=='D')
                     {
                         DVD_CD* d = new DVD_CD;
-                    stringstream ss(s);
+                    
                     ss1 >>*d;
                     zbior.push_back(d);
 

@@ -4,6 +4,7 @@
 #include<list>
 #include<map>
 using namespace std;
+
 class Przedmiot
 {
 private:
@@ -30,7 +31,7 @@ public:
 	Przedmiot& setYear(int);
 
 	virtual void Add(vector<Przedmiot*>& lista) = 0;
-	virtual void Delete(vector<Przedmiot*>& lista) = 0;
+	virtual void Delete(string bookId,vector<Przedmiot*>& lista) = 0;
 	virtual void Modify(Przedmiot*& book) = 0;
 	virtual void Show() = 0;
 
@@ -49,7 +50,7 @@ public:
 	//Ksiazka& setGenre();
 	void Show();
 	void Add(vector<Przedmiot*>& lista);
-	void Delete(vector<Przedmiot*>& lista);
+	void Delete(string bookId,vector<Przedmiot*>& lista);
 	void Modify(Przedmiot* &book);
 
 	friend istream& operator>>(istream& s, Ksiazka &k);
@@ -83,11 +84,12 @@ public:
 
 	//void CheckHaslo(string, string email);
 	bool CheckEmail(string, vector<User*> lista);
-
+	bool CheckHaslo(string haslo, string email, vector<User*> lista);
+	
 	friend istream& operator>>(istream& s, User & u);
 	friend ostream& operator<<(ostream& s, const User &u);
 };
-
+typedef vector< pair<User, vector<Przedmiot*>>> baza;
 class Konto :public User
 {
 public:
@@ -97,27 +99,27 @@ public:
 	void Issue(User *person, Przedmiot* book, vector< pair<User, vector<Przedmiot*>>> &issued, vector<Przedmiot*>&);
 	//void Admin();
 	void Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
-	void Delete(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
-	void Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
+	void Delete(int person, baza& issued, vector<User*>&);
+	Konto Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 };
 
 class Menu
 {
 public:
-	Menu();
-	void Login();
-	void Register();
+	Menu() {};
+	Konto Login(vector<User*> members);
+	Konto Register(vector<User*> members, baza zbior);
 	void Search();
-	void Admin();
+	void Admin(baza zbior, vector<Przedmiot*> books, vector<User*> members);
 	void MyKonto();
-	void Book();
-	void Game();
+	void Books();
+	void Games();
 	void Multimedia();
 };
 class Searching
 {
 public:
-	Searching();
+	Searching() {};
 	void SearchByTitle();
 	void SearchByAutor();
 	void SearchByYear();

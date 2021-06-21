@@ -42,14 +42,20 @@ void Ksiazka::Add(vector<Przedmiot*>& lista)	//ok
 	lista.push_back(book);
 }
 
-void Ksiazka::Delete(vector<Przedmiot*>& lista)
+void Ksiazka::Delete(string bookId,vector<Przedmiot*>& lista)
 {
-	string id;
+	/*string id;
 	cout << "Podaj id ksiazki do usuniecia ";
-	cin >> id;
+	cin >> id;*/
+
 	for (int i = 0; i < lista.size(); i++)
 	{
-		if (lista[i]->Id() == id)
+		if (lista[i]->Available() == 0)
+		{
+			cout << "Ksiazka jest wypozyczona nie mozna usunac!!";
+			break;
+		}
+		if (lista[i]->Id() == bookId)
 		{
 			lista.erase(lista.begin() + i);
 			break;
@@ -115,12 +121,14 @@ void Ksiazka::Modify(Przedmiot* &book)
 		break;
 	}
 	case 6:
-		cout << "Ustaw dostepnosc ksiazki: " << endl;
-		cout << "1.Niedostepna" << endl << "2.Dostepna";
-		cin >> l;
-		k->setAvailable(l - 1);
+	{cout << "Ustaw dostepnosc ksiazki: " << endl;
+	cout << "1.Niedostepna" << endl << "2.Dostepna";
+	cin >> l;
+	k->setAvailable(l - 1);
+	break;
+	}
+	default:
 		break;
-
 	}
 	book = k;
 }
