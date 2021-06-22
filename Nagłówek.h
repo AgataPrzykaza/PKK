@@ -157,6 +157,7 @@ public:
 	void Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 	void Delete(int person, baza& issued, vector<User*>&);
 	Konto Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
+	bool Oddaj(User* person,Przedmiot* p, baza& issued, vector<Przedmiot*>&);
 };
 
 class Menu
@@ -167,7 +168,7 @@ public:
 	Konto Register(vector<User*> members, baza zbior);
 	void Search();
 	void Admin(baza zbior, vector<Przedmiot*> &books, vector<User*> members);
-	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued);
+	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book);
 	void Books();
 	void Games();
 	void Multimedia();
@@ -176,11 +177,12 @@ class Searching
 {
 public:
 	Searching() {};
-	void SearchByTitle();
-	void SearchByAutor();
-	void SearchByYear();
-	void SearchByGenre();
+	void SearchByTitle(vector<Przedmiot*> books);
+	void SearchByAutor(vector<Przedmiot*> books);
+	void SearchByYear(vector<Przedmiot*> books);
+	void SearchByGenre(vector<Przedmiot*> books);
 
 };
 int IdMaker(int);
 int LastId(vector<User*>& users);
+Przedmiot* getPrzedmiot(string id,vector<Przedmiot*> book);

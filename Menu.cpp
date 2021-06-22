@@ -202,7 +202,7 @@ Konto Menu::Register(vector<User*> members, baza zbior)//ok
 	return person;
 }
 
-void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued)
+void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book)
 {
 	cout << "\t\t Twoje konto" << endl;
 	cout << person;
@@ -210,12 +210,23 @@ void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued)
 	
 	Konto k;
 	k.MyBooks(person, issued);
+	
 	cout << "Czy chcesz oddac jakis przedmiot? T-tak N-nie" << endl;
 	char s;
 	cin >> s;
 	if (s == 'T')
 	{
-		////oddac;
+		string id;
+		cout << "Podaj id przedmiotu ktory chcesz oddac";
+		cin >> id;
+		Przedmiot* p = getPrzedmiot(id, book);
+		k.Oddaj(&person, p, issued, book);
+		cout << "Przedmiot oddany!!!" << endl;
+		cout << "Wcisnij enter by wyjsc";
+		if (cin.get())
+		{
+			return;
+		}
 	}
 	if (s == 'N')
 	{

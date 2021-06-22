@@ -136,6 +136,18 @@ void Ksiazka::Modify(Przedmiot* &book) //ok
 	book = k;
 }
 
+Przedmiot* getPrzedmiot(string id,vector<Przedmiot*> book)
+{
+	for (auto i : book)
+	{
+		if (id == i->Id())
+		{
+			return i;
+		}
+	}
+
+}
+
 istream& operator>>(istream& s, Ksiazka& k)
 {
 	

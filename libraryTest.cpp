@@ -60,16 +60,33 @@ int main()
     ja.Modify(*u[4], zbior, u);
     cout << *u[4];
     cout << zbior[zbior.size() - 1].first;*/
-    
-    DVD d;
+
+   zbior = PrzedmiotPeopleGet("buff.txt");
+
+  
+   Searching s;
+   s.SearchByTitle(ksiaz);
+
+
+   PrzedmiotSave("book.txt", ksiaz);
+   /*Konto ja;
+   ja.Oddaj(u[1], ksiaz[3], zbior, ksiaz);
+   cout << zbior[1].second.size();
+   ;*/
+
+
+
+
+
+  /*  DVD d;
     d.Add(ksiaz);
     ksiaz[ksiaz.size() - 1]->Show();
    Przedmiot* nowy=ksiaz[ksiaz.size() - 1];
-   cout << *dynamic_cast<DVD*>(nowy);
+   cout << *dynamic_cast<DVD*>(nowy);*/
    // ksiaz[ksiaz.size() - 1]->Show();
     
     
-    //zbior = PrzedmiotPeopleGet("buff.txt");
+    
     ///*Ksiazka k;
     //k.Add(ksiaz);*/
 

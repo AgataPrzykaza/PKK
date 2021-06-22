@@ -289,6 +289,37 @@ Konto Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&
 	Konto nowy(id, name, email, haslo);
 	return nowy ;
 }
+bool Konto::Oddaj(User* person,Przedmiot*p, baza& issued, vector<Przedmiot*>& books) //ok
+{
+	for (auto& i : books)
+	{
+		if (p->Id() == i->Id())
+		{
+			i->setAvailable(1);
+			break;
+		}
+
+	}
+	for (auto& l : issued)
+	{
+		if (l.first.getID() == person->getID())
+		{
+			p->setAvailable(1);
+			for (int m=0 ; m<l.second.size() ; m++)
+			{
+				if (l.second[m]->Id() == p->Id())
+				{
+					l.second.erase(l.second.begin() + m);
+					return 1;
+				}
+			}
+			
+		}
+	}
+	return 0;
+
+}
+
 int IdMaker(int latest)
 {
 	return ++latest;
