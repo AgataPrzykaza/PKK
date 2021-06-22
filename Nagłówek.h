@@ -31,7 +31,7 @@ public:
 	Przedmiot& setYear(int);
 
 	virtual void Add(vector<Przedmiot*>& lista) = 0;
-	virtual void Delete(string bookId,vector<Przedmiot*>& lista) = 0;
+	virtual bool Delete(string bookId,vector<Przedmiot*>& lista) = 0;
 	virtual void Modify(Przedmiot*& book) = 0;
 	virtual void Show() = 0;
 
@@ -50,11 +50,29 @@ public:
 	//Ksiazka& setGenre();
 	void Show();
 	void Add(vector<Przedmiot*>& lista);
-	void Delete(string bookId,vector<Przedmiot*>& lista);
+	bool Delete(string bookId,vector<Przedmiot*>& lista);
 	void Modify(Przedmiot* &book);
 
 	friend istream& operator>>(istream& s, Ksiazka &k);
 	friend ostream& operator<<(ostream& s, Ksiazka &k);
+
+
+};
+
+class Gra : public Przedmiot
+{
+public:
+	Gra(string, string, string, int, bool);
+	Gra() :Przedmiot() {};
+
+	
+	void Show();
+	void Add(vector<Przedmiot*>& lista);
+	bool Delete(string bookId, vector<Przedmiot*>& lista);
+	void Modify(Przedmiot*& book);
+
+	friend istream& operator>>(istream& s, Gra& g);
+	friend ostream& operator<<(ostream& s, Gra& g);
 
 
 };
@@ -107,11 +125,11 @@ class Menu
 {
 public:
 	Menu() {};
-	Konto Login(vector<User*> members);
+	User Login(vector<User*> members);
 	Konto Register(vector<User*> members, baza zbior);
 	void Search();
-	void Admin(baza zbior, vector<Przedmiot*> books, vector<User*> members);
-	void MyKonto();
+	void Admin(baza zbior, vector<Przedmiot*> &books, vector<User*> members);
+	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued);
 	void Books();
 	void Games();
 	void Multimedia();

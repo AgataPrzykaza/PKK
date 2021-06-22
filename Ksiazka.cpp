@@ -25,8 +25,9 @@ void Ksiazka::Add(vector<Przedmiot*>& lista)	//ok
 	int year;
 
 	cout << "Podaj dane ksiazki " << endl;
-	cout << "tytul: ";
+	cout << "tytul, cudzyslowach: ";
 	//cin >> title;
+	getline(cin, title);
 	getline(cin, title);
 	cout << "autor: ";
 	getline(cin, autor);
@@ -42,7 +43,7 @@ void Ksiazka::Add(vector<Przedmiot*>& lista)	//ok
 	lista.push_back(book);
 }
 
-void Ksiazka::Delete(string bookId,vector<Przedmiot*>& lista)
+bool Ksiazka::Delete(string bookId,vector<Przedmiot*>& lista)
 {
 	/*string id;
 	cout << "Podaj id ksiazki do usuniecia ";
@@ -50,20 +51,22 @@ void Ksiazka::Delete(string bookId,vector<Przedmiot*>& lista)
 
 	for (int i = 0; i < lista.size(); i++)
 	{
-		if (lista[i]->Available() == 0)
-		{
-			cout << "Ksiazka jest wypozyczona nie mozna usunac!!";
-			break;
-		}
+		
 		if (lista[i]->Id() == bookId)
 		{
+			if (lista[i]->Available() == 0)
+		{
+			cout << "Ksiazka jest wypozyczona nie mozna usunac!!";
+			return 0;
+
+		}
 			lista.erase(lista.begin() + i);
-			break;
+			return 1;
 		}
 
 	}
 }
-void Ksiazka::Modify(Przedmiot* &book)
+void Ksiazka::Modify(Przedmiot* &book) //ok
 {
 	Ksiazka* k = dynamic_cast<Ksiazka*> (book);
 	int option, l;
@@ -97,11 +100,11 @@ void Ksiazka::Modify(Przedmiot* &book)
 	{	string dod;
 		cout << "Podaj nowego autora ksiazki:";
 		cin >> s;
-		while (s[s.size() - 1] != ',')
+		/*while (s[s.size() - 1] != ',')
 		{
 			cin >> dod;
 			s = s += " " + dod;
-		}
+		}*/
 		//getline(cin, s);
 		k->setAutor(s);
 		break;
@@ -148,7 +151,7 @@ istream& operator>>(istream& s, Ksiazka& k)
 
 	}
 	s >> autor;
-	/*while (autor[autor.size()- 1] != '"')
+	/*while (autor[autor.size()- 1] != ',')
 	{
 		s >> dane;
 		autor = autor +" "+dane;

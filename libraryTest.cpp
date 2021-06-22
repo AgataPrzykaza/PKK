@@ -46,12 +46,12 @@ baza PrzedmiotPeopleGet(const string& fileName);
 
 int main()
 {
-    baza zbior ;
+    baza zbior;
     vector<Przedmiot*> ksiaz=PrzedmiotGet("przedmioty.txt");
     vector<User*> u = PeopleGet("users.txt");
     //User j(91, "kot na plot", "ko@.pl", "ko");
-    pair<User, vector<Przedmiot*>> cos{ *u[0],{ksiaz[0],ksiaz[2]} };
-    pair<User, vector<Przedmiot*>> cos2{ *u[1],{ksiaz[1],ksiaz[3]} };
+    //pair<User, vector<Przedmiot*>> cos{ *u[0],{ksiaz[0],ksiaz[2]} };
+    //pair<User, vector<Przedmiot*>> cos2{ *u[1],{ksiaz[1],ksiaz[3]} };
    /* zbior.push_back(cos);
     zbior.push_back(cos2);
     Konto ja;
@@ -62,20 +62,21 @@ int main()
     cout << zbior[zbior.size() - 1].first;*/
 
 
-    
-    if (cin.get())
-    {
-        cout << "ah tak";
-    }
-    ;
+    zbior = PrzedmiotPeopleGet("buff.txt");
+    /*Ksiazka k;
+    k.Add(ksiaz);*/
 
-   
-
-
+    User n = zbior[0].first;
+    Menu m;
+    m.MyKonto(n, zbior);
 
     
-    /*zbior = PrzedmiotPeopleGet("buff2.txt");
-    PrzedmiotPeopleSave(zbior, "buff.txt");*/
+
+
+    
+    PeopleSave("users.txt", u);
+    PrzedmiotSave("book.txt", ksiaz);
+    PrzedmiotPeopleSave(zbior, "buff.txt");
     
     /*Ksiazka k; 
     k.Modify(ksiaz[1]);

@@ -1,6 +1,6 @@
 #include"Nag³ówek.h"
 
-void Menu::Admin(baza zbior,vector<Przedmiot*> books,vector<User*> members)
+void Menu::Admin(baza zbior,vector<Przedmiot*> &books,vector<User*> members)
 {
 	
 	int option;
@@ -32,7 +32,7 @@ void Menu::Admin(baza zbior,vector<Przedmiot*> books,vector<User*> members)
 		}
 	}
 	case 2:
-	{
+	{					
 		int id;
 		User osoba;
 		cout << "Podaj id uzydkownika ktorego chcesz zmienic dane" << endl;
@@ -58,8 +58,8 @@ void Menu::Admin(baza zbior,vector<Przedmiot*> books,vector<User*> members)
 		}
 	}
 	case 3:
-	{	int o;
-		cout << "Dodaj nowy przedmiot";
+	{	int o;										//ok
+		cout << "Dodaj nowy przedmiot"<<endl;
 		cout << "1.Ksiazka" << endl << "2.Gra" <<endl<< "3.DVD" << endl << "4.CD" << endl;
 		cin>>o;
 		if (o == 1)
@@ -85,15 +85,17 @@ void Menu::Admin(baza zbior,vector<Przedmiot*> books,vector<User*> members)
 		return;
 	}
 	case 4:
-	{   string s;
+	{   string s;													//ok
 		cout << "Podaj id przedmiotu do usuniecia" << endl;
 		cin >> s;
 		for (auto i : books)
 		{
 			if (i->Id() == s)
 			{
-				i->Delete(s, books);
-				cout << "Przedmiot usuniety z bazy !" << endl;
+				if (i->Delete(s, books) == 1)
+				{
+					cout << "Przedmiot usuniety z bazy !" << endl;
+				}
 				cout << "Wcisnij enter by wyjsc";
 				if (cin.get())
 				{
@@ -104,11 +106,11 @@ void Menu::Admin(baza zbior,vector<Przedmiot*> books,vector<User*> members)
 		}
 	}
 	case 5:
-	{	string s;
+	{	string s;		//ok
 		cout << "Podaj id przedmiotu do modyfikacji" << endl;
 		cin >> s;
 		int bylo=0;
-		Przedmiot* tmp;
+		Przedmiot* tmp=books[0];
 		for (int i=0;i<books.size();i++)
 		{
 			if (books[i]->Id() == s&&books[i]->Available()==1)
@@ -152,9 +154,9 @@ void Menu::Admin(baza zbior,vector<Przedmiot*> books,vector<User*> members)
 	}
 }
 
-Konto Menu::Login(vector<User*> members) ///czy zmienic na User
+User Menu::Login(vector<User*> members) //ok
 {
-	Konto zalogowany;
+	User zalogowany;
 	string email, haslo;
 	cout << "\t\t Zaloguj sie";
 	cout << "Podaj email: ";
@@ -187,7 +189,7 @@ Konto Menu::Login(vector<User*> members) ///czy zmienic na User
 	
 }
 
-Konto Menu::Register(vector<User*> members, baza zbior) // moze user ??
+Konto Menu::Register(vector<User*> members, baza zbior)//ok
 {
 	Konto person;
 	person=person.Add(zbior, members);
@@ -197,4 +199,31 @@ Konto Menu::Register(vector<User*> members, baza zbior) // moze user ??
 	{
 		return person;
 	}
+	return person;
+}
+
+void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued)
+{
+	cout << "\t\t Twoje konto" << endl;
+	cout << person;
+	cout << endl << "--------------------------------" << endl;
+	
+	Konto k;
+	k.MyBooks(person, issued);
+	cout << "Czy chcesz oddac jakis przedmiot? T-tak N-nie" << endl;
+	char s;
+	cin >> s;
+	if (s == 'T')
+	{
+		////oddac;
+	}
+	if (s == 'N')
+	{
+		cout << "Wcisnij enter by wyjsc";
+		if (cin.get())
+		{
+			return;
+		}
+	}
+	return;
 }
