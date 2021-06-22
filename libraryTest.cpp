@@ -60,11 +60,15 @@ int main()
     ja.Modify(*u[4], zbior, u);
     cout << *u[4];
     cout << zbior[zbior.size() - 1].first;*/
-    ksiaz[ksiaz.size() - 1]->Show();
+    
     DVD d;
     d.Add(ksiaz);
     ksiaz[ksiaz.size() - 1]->Show();
-
+   Przedmiot* nowy=ksiaz[ksiaz.size() - 1];
+   cout << *dynamic_cast<DVD*>(nowy);
+   // ksiaz[ksiaz.size() - 1]->Show();
+    
+    
     //zbior = PrzedmiotPeopleGet("buff.txt");
     ///*Ksiazka k;
     //k.Add(ksiaz);*/

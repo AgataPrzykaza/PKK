@@ -1,16 +1,16 @@
 #include"Nag³ówek.h"
 
-DVD::DVD(string id, string title, string autor, int year, string genre, bool dostepny)
+CD::CD(string id, string title, string autor, int year, string genre, bool dostepny)
 	: Przedmiot(id, title, autor, year, dostepny), genre(genre) {};
 
-string DVD::Genre()
+string CD::Genre()
 {
 	return genre;
 }
 
-void DVD::Show() //ok
+void CD::Show() //ok
 {
-	cout << "DVD - ";
+	cout << "CD - ";
 	cout << this->Id() << ": " << " " << this->Title() << "  " << " " << this->Autor() << " " << endl;
 	cout << "      Rok wydania: " << this->Year() << " Gatunek: " << genre << " |";
 	if (this->Available() == 1)
@@ -18,13 +18,12 @@ void DVD::Show() //ok
 	else
 		cout << "Niedostepne!" << endl;
 }
-
-void DVD::Add(vector<Przedmiot*>& lista)	//ok
+void CD::Add(vector<Przedmiot*>& lista)	//ok
 {
 	string title, autor, genre, id;
 	int year;
 
-	cout << "Podaj dane DVD " << endl;
+	cout << "Podaj dane CD " << endl;
 	cout << "tytul, cudzyslowach: ";
 	//cin >> title;
 	getline(cin, title);
@@ -38,12 +37,12 @@ void DVD::Add(vector<Przedmiot*>& lista)	//ok
 	cin >> year;
 	cout << "gatunek: ";
 	cin >> genre;
-	Przedmiot* book = new DVD(id, title, autor, year, genre, 1);
+	Przedmiot* book = new CD(id, title, autor, year, genre, 1);
 
 	lista.push_back(book);
 }
 
-bool DVD::Delete(string bookId, vector<Przedmiot*>& lista) //ok
+bool CD::Delete(string bookId, vector<Przedmiot*>& lista) //ok
 {
 	/*string id;
 	cout << "Podaj id ksiazki do usuniecia ";
@@ -56,7 +55,7 @@ bool DVD::Delete(string bookId, vector<Przedmiot*>& lista) //ok
 		{
 			if (lista[i]->Available() == 0)
 			{
-				cout << "DVD jest wypozyczone nie mozna usunac!!";
+				cout << "CD jest wypozyczone nie mozna usunac!!";
 				return 0;
 
 			}
@@ -67,9 +66,9 @@ bool DVD::Delete(string bookId, vector<Przedmiot*>& lista) //ok
 	}
 }
 
-void DVD::Modify(Przedmiot*& book)//ok 
+void CD::Modify(Przedmiot*& book)//ok 
 {
-	DVD* k = dynamic_cast<DVD*> (book);
+	CD* k = dynamic_cast<CD*> (book);
 	int option, l;
 	string s;
 	cout << "Zmienic: " << endl;
@@ -79,7 +78,7 @@ void DVD::Modify(Przedmiot*& book)//ok
 	switch (option)
 	{
 	case 1:
-	{	cout << "Podaj nowy ID DVD:";
+	{	cout << "Podaj nowy ID CD:";
 	cin >> s;
 	k->setID(s);
 	break;
@@ -87,7 +86,7 @@ void DVD::Modify(Przedmiot*& book)//ok
 	}
 	case 2:
 	{	string dod;
-	cout << "Podaj nowy tytul DVD:" << endl;
+	cout << "Podaj nowy tytul CD:" << endl;
 	cin >> s;
 	while (s[s.size() - 1] != '"')
 	{
@@ -99,7 +98,7 @@ void DVD::Modify(Przedmiot*& book)//ok
 	}
 	case 3:
 	{	string dod;
-	cout << "Podaj nowego autora DVD:";
+	cout << "Podaj nowego autora CD:";
 	cin >> s;
 	/*while (s[s.size() - 1] != ',')
 	{
@@ -112,20 +111,20 @@ void DVD::Modify(Przedmiot*& book)//ok
 	}
 	case 4:
 	{
-		cout << "Podaj nowy rok wydania DVD:";
+		cout << "Podaj nowy rok wydania CD:";
 		cin >> l;
 		k->setYear(l);
 		break;
 	}
 	case 5:
 	{
-		cout << "Podaj nowy gatunek DVD:";
+		cout << "Podaj nowy gatunek CD:";
 		cin >> s;
 		k->genre = s;
 		break;
 	}
 	case 6:
-	{cout << "Ustaw dostepnosc DVD: " << endl;
+	{cout << "Ustaw dostepnosc CD: " << endl;
 	cout << "1.Niedostepne" << endl << "2.Dostepne";
 	cin >> l;
 	k->setAvailable(l - 1);
@@ -137,7 +136,7 @@ void DVD::Modify(Przedmiot*& book)//ok
 	book = k;
 }
 
-istream& operator>>(istream& s, DVD& d)
+istream& operator>>(istream& s, CD& d)
 {
 
 	string id, title, autor, genre, dane;
@@ -163,10 +162,9 @@ istream& operator>>(istream& s, DVD& d)
 	d.setAvailable(available);
 	return s;
 }
-
-ostream& operator<<(ostream& s, DVD& d)//ok
+ostream& operator<<(ostream& s, CD& d)//ok
 {
-	s << d.Id() << " " << d.Title() << " " <<d.Autor() << " " << d.Year() << " " <<
+	s << d.Id() << " " << d.Title() << " " << d.Autor() << " " << d.Year() << " " <<
 		d.Genre() << " " << d.Available();
 	return s;
 }

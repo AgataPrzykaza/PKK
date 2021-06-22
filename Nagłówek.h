@@ -96,7 +96,25 @@ public:
 
 
 };
+class CD: public Przedmiot
+{
+	string genre;
 
+public:
+	CD(string, string, string, int, string, bool);
+	CD() :Przedmiot(), genre("h") {};
+	string Genre();
+	//Ksiazka& setGenre();
+	void Show();
+	void Add(vector<Przedmiot*>& lista);
+	bool Delete(string bookId, vector<Przedmiot*>& lista);
+	void Modify(Przedmiot*& book);
+
+	friend istream& operator>>(istream& s, CD& d);
+	friend ostream& operator<<(ostream& s, CD& d);
+
+
+};
 class User
 {
 private:

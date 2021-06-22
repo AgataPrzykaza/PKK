@@ -227,3 +227,8 @@ void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued)
 	}
 	return;
 }
+
+void Menu::Books()
+{
+
+}
