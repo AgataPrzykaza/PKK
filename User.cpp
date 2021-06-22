@@ -320,6 +320,115 @@ bool Konto::Oddaj(User* person,Przedmiot*p, baza& issued, vector<Przedmiot*>& bo
 
 }
 
+bool Konto::Books(User person, baza issued)
+{
+	cout << "\t\tMoje wypozyczone " << endl;
+
+	for (auto i : issued)
+	{
+		if (i.first.getID() == person.getID())
+		{
+			if (i.second.size() == 0)
+			{
+				return 0;
+
+			}
+			for (auto l : i.second)
+			{
+				if (l->Id()[0] == 'K')
+				{
+					l->Show();
+				}
+				
+			}
+		}
+
+	}
+	return 1;
+}
+
+bool Konto::Gry(User person, baza issued)
+{
+	cout << "\t\tMoje wypozyczone " << endl;
+
+	for (auto i : issued)
+	{
+		if (i.first.getID() == person.getID())
+		{
+			if (i.second.size() == 0)
+			{
+				return 0;
+
+			}
+			for (auto l : i.second)
+			{
+				if (l->Id()[0] == 'G')
+				{
+					l->Show();
+				}
+
+			}
+		}
+
+	}
+	return 1;
+}
+
+bool Konto::DVD(User person, baza issued)
+{
+	cout << "\t\tMoje wypozyczone " << endl;
+
+	for (auto i : issued)
+	{
+		if (i.first.getID() == person.getID())
+		{
+			if (i.second.size() == 0)
+			{
+				return 0;
+
+			}
+			for (auto l : i.second)
+			{
+				if (l->Id()[0] == 'D')
+				{
+					l->Show();
+				}
+
+			}
+		}
+
+	}
+	return 1;
+}
+
+bool Konto::CD(User person, baza issued)
+{
+	cout << "\t\tMoje wypozyczone " << endl;
+	
+	for (auto i : issued)
+	{
+		if (i.first.getID() == person.getID())
+		{
+			if (i.second.size() == 0)
+			{
+				return 0;
+				
+			}
+			for (auto l : i.second)
+			{
+				if (l->Id()[0] == 'C')
+				{
+					l->Show();
+				}
+
+			}
+		}
+
+	}
+	return 1;
+}
+
+
 int IdMaker(int latest)
 {
 	return ++latest;

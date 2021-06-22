@@ -158,6 +158,10 @@ public:
 	void Delete(int person, baza& issued, vector<User*>&);
 	Konto Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 	bool Oddaj(User* person,Przedmiot* p, baza& issued, vector<Przedmiot*>&);
+	bool Books(User person, baza issued);
+	bool Gry(User person, baza issued);
+	bool DVD(User person, baza issued);
+	bool CD(User person, baza issued);
 };
 
 class Menu
@@ -170,8 +174,8 @@ public:
 	void Admin(baza zbior, vector<Przedmiot*> &books, vector<User*> members);
 	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book);
 	void Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
-	void Games();
-	void Multimedia();
+	void Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
+	void Multimedia(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
 };
 class Searching
 {

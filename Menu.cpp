@@ -246,6 +246,7 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 	int option;
 	cin >> option;
 	char k;
+	string s;
 	if (option == 1)
 	{
 		Searching szukanie;
@@ -259,18 +260,127 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 			cin >> k;
 			if (k == 'T')
 			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Ksiazka wypozyczona"<<endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
 
 			}
 			if (k == 'N')
 			{
-
+				return;
 			}
 			
+
+		}
+		if (option== 2)
+		{
+			szukanie.SearchByAutor(book);
+			cout << "Chcesz wypozyczyc ksiazke T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Ksiazka wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
+
+		}
+		if (option == 3)
+		{
+			szukanie.SearchByYear(book);
+			cout << "Chcesz wypozyczyc ksiazke T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Ksiazka wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
+
+		}
+		if (option == 4)
+		{
+			szukanie.SearchByGenre(book);
+			cout << "Chcesz wypozyczyc ksiazke T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Ksiazka wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
 
 		}
 	}
 	if (option == 2)
 	{
+		Konto me;
+		if (me.Books(person, issued) == 1)
+		{
+			cout << "Chcesz oddac jakas ksiazke (T/N) ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				cout << "Podaj id ksiazki: ";
+				cin >> s;
+				me.Oddaj(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Ksiazka oddana";
+				cout << "Enter by wyjsc";
+				if (cin.get())
+					return;
+
+			}
+		}
+		else
+		{
+			cout << "Brak wypozyczonych ksiazek\n";
+			cout << "Enter by wyjsc";
+			if (cin.get())
+				return;
+		}
 
 	}
 	if (option == 3)
@@ -281,5 +391,165 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 	{
 		return;
 	}
+
+}
+
+void Menu::Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book)
+{
+	cout << "\t\t Gry" << endl;
+	cout << "1.Wyszukaj gre" << endl << "2.Pokaz moje gry" << endl << "3.Wyjdz" << endl;
+	int option;
+	cin >> option;
+	char k;
+	string s;
+	if (option == 1)
+	{
+		Searching szukanie;
+		cout << "\t\t WYSZUKIWANIE" << endl;
+		cout << "1.Po tytule 2.Po autorze 3.Po roku wydania 4.Po gatunku" << endl;
+		cin >> option;
+		if (option == 1)
+		{
+			szukanie.SearchByTitle(book);
+			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Gra wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
+
+
+		}
+		if (option == 2)
+		{
+			szukanie.SearchByAutor(book);
+			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Gra wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
+
+		}
+		if (option == 3)
+		{
+			szukanie.SearchByYear(book);
+			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Gra wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
+
+		}
+		if (option == 4)
+		{
+			szukanie.SearchByGenre(book);
+			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				Konto me;
+				cout << "Podaj jej id: ";
+				cin >> s;
+				me.Issue(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Gra wypozyczona" << endl;
+				cout << "Enter by wyjsc";
+				if (cin.get())
+				{
+					return;
+				}
+
+			}
+			if (k == 'N')
+			{
+				return;
+			}
+
+		}
+	}
+	if (option == 2)
+	{
+		Konto me;
+		if (me.Gry(person, issued) == 1)
+		{
+			cout << "Chcesz oddac jakas gre (T/N) ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				cout << "Podaj id gry: ";
+				cin >> s;
+				me.Oddaj(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Gra oddana";
+				cout << "Enter by wyjsc";
+				if (cin.get())
+					return;
+
+			}
+		}
+		else
+		{
+			cout << "Brak wypozyczonych gier\n";
+			cout << "Enter by wyjsc";
+			if (cin.get())
+				return;
+		}
+
+	}
+	if (option == 3)
+	{
+		return;
+	}
+	else
+	{
+		return;
+	}
+
+}
+
+void Menu::Multimedia(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*> &book)
+{
 
 }
