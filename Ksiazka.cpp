@@ -13,7 +13,7 @@ void Ksiazka::Show() //ok
 {
 	cout << "Ksiazka - ";
 	cout << this->Id() << ": " << " " << this->Title() << "  " <<" "<< this->Autor() <<" "<< endl;
-	cout <<"\t" "Rok wydania: " << this->Year() << " Gatunek: " << genre<<" |";
+	cout <<"          Rok wydania: " << this->Year() << " Gatunek: " << genre<<" |";
 	if (this->Available() == 1)
 		cout << "Dostepna!" << endl;
 	else

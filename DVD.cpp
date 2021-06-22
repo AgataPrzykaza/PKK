@@ -1,22 +1,30 @@
 #include"Nag³ówek.h"
-Gra::Gra(string id, string tytul, string autor, int rok, bool dostep)
-	:Przedmiot(id, tytul, autor, rok, dostep) {};
-void Gra::Show() //ok
+
+DVD::DVD(string id, string title, string autor, int year, string genre, bool dostepny)
+	: Przedmiot(id, title, autor, year, dostepny), genre(genre) {};
+
+string DVD::Genre()
 {
-	cout << "Gra - ";
+	return genre;
+}
+
+void DVD::Show() 
+{
+	cout << "DVD - ";
 	cout << this->Id() << ": " << " " << this->Title() << "  " << " " << this->Autor() << " " << endl;
-	cout << "      Rok wydania: " << this->Year() << " |";
+	cout << "      Rok wydania: " << this->Year() << " Gatunek: " << genre << " |";
 	if (this->Available() == 1)
 		cout << "Dostepna!" << endl;
 	else
 		cout << "Niedostepna!" << endl;
 }
-void Gra::Add(vector<Przedmiot*>& lista)	//ok
+
+void DVD::Add(vector<Przedmiot*>& lista)	//ok
 {
-	string title, autor, id;
+	string title, autor, genre, id;
 	int year;
 
-	cout << "Podaj dane gry " << endl;
+	cout << "Podaj dane DVD " << endl;
 	cout << "tytul, cudzyslowach: ";
 	//cin >> title;
 	getline(cin, title);
@@ -28,12 +36,14 @@ void Gra::Add(vector<Przedmiot*>& lista)	//ok
 	cin >> id;
 	cout << "rok wydania: ";
 	cin >> year;
-	Przedmiot* book = new Gra(id, title, autor, year, 1);
+	cout << "gatunek: ";
+	cin >> genre;
+	Przedmiot* book = new DVD(id, title, autor, year, genre, 1);
 
 	lista.push_back(book);
 }
 
-bool Gra::Delete(string bookId, vector<Przedmiot*>& lista) //ok
+bool DVD::Delete(string bookId, vector<Przedmiot*>& lista)
 {
 	/*string id;
 	cout << "Podaj id ksiazki do usuniecia ";
@@ -46,7 +56,7 @@ bool Gra::Delete(string bookId, vector<Przedmiot*>& lista) //ok
 		{
 			if (lista[i]->Available() == 0)
 			{
-				cout << "Gra jest wypozyczona nie mozna usunac!!";
+				cout << "DVD jest wypozyczone nie mozna usunac!!";
 				return 0;
 
 			}
@@ -56,39 +66,40 @@ bool Gra::Delete(string bookId, vector<Przedmiot*>& lista) //ok
 
 	}
 }
-void Gra::Modify(Przedmiot*& book) 
+
+void DVD::Modify(Przedmiot*& book) 
 {
-	Gra* g = dynamic_cast<Gra*> (book);
+	DVD* k = dynamic_cast<DVD*> (book);
 	int option, l;
 	string s;
 	cout << "Zmienic: " << endl;
 	cout << "1.Id " << endl << "2.Tytul" << endl << "3.Autor" << endl << "4.Rok wydania"
-		<< endl << "5.Dostepnosc" << endl ;
+		<< endl << "5.Gatunek" << endl << "6.Dostepnosc" << endl;
 	cin >> option;
 	switch (option)
 	{
 	case 1:
-	{	cout << "Podaj nowy ID gry:";
+	{	cout << "Podaj nowy ID DVD:";
 	cin >> s;
-	g->setID(s);
+	k->setID(s);
 	break;
 
 	}
 	case 2:
 	{	string dod;
-	cout << "Podaj nowy tytul gry:" << endl;
+	cout << "Podaj nowy tytul DVD:" << endl;
 	cin >> s;
 	while (s[s.size() - 1] != '"')
 	{
 		cin >> dod;
 		s = s += " " + dod;
 	}
-	g->setTitle(s);
+	k->setTitle(s);
 	break;
 	}
 	case 3:
 	{	string dod;
-	cout << "Podaj nowego autora gry:";
+	cout << "Podaj nowego autora DVD:";
 	cin >> s;
 	/*while (s[s.size() - 1] != ',')
 	{
@@ -96,34 +107,40 @@ void Gra::Modify(Przedmiot*& book)
 		s = s += " " + dod;
 	}*/
 	//getline(cin, s);
-	g->setAutor(s);
+	k->setAutor(s);
 	break;
 	}
 	case 4:
 	{
-		cout << "Podaj nowy rok wydania gry:";
+		cout << "Podaj nowy rok wydania DVD:";
 		cin >> l;
-		g->setYear(l);
+		k->setYear(l);
 		break;
 	}
-
 	case 5:
-	{cout << "Ustaw dostepnosc gry: " << endl;
-	cout << "1.Niedostepna" << endl << "2.Dostepna";
+	{
+		cout << "Podaj nowy gatunek DVD:";
+		cin >> s;
+		k->genre = s;
+		break;
+	}
+	case 6:
+	{cout << "Ustaw dostepnosc DVD: " << endl;
+	cout << "1.Niedostepne" << endl << "2.Dostepne";
 	cin >> l;
-	g->setAvailable(l - 1);
+	k->setAvailable(l - 1);
 	break;
 	}
 	default:
 		break;
 	}
-	book = g;
+	book = k;
 }
 
-istream& operator>>(istream& s, Gra& g) //ok
+istream& operator>>(istream& s, DVD& d)
 {
 
-	string id, title, autor, dane;
+	string id, title, autor, genre, dane;
 	int year;
 	bool available;
 
@@ -141,14 +158,15 @@ istream& operator>>(istream& s, Gra& g) //ok
 		s >> dane;
 		autor = autor +" "+dane;
 	}*/
-	s >> year >> available;
-	g.setID(id); g.setTitle(title); g.setAutor(autor); g.setYear(year); 
-	g.setAvailable(available);
+	s >> year >> genre >> available;
+	d.setID(id); d.setTitle(title); d.setAutor(autor); d.setYear(year); d.genre = genre;
+	d.setAvailable(available);
 	return s;
 }
 
-ostream& operator<<(ostream& s, Gra& g)  //ok
+ostream& operator<<(ostream& s, DVD& d)
 {
-	s << g.Id() << " " << g.Title() << " " <<g.Autor() << " " << g.Year()<<" " << g.Available();
+	s << d.Id() << " " << d.Title() << " " <<d.Autor() << " " << d.Year() << " " <<
+		d.Genre() << " " << d.Available();
 	return s;
 }

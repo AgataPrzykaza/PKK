@@ -60,23 +60,26 @@ int main()
     ja.Modify(*u[4], zbior, u);
     cout << *u[4];
     cout << zbior[zbior.size() - 1].first;*/
+    ksiaz[ksiaz.size() - 1]->Show();
+    DVD d;
+    d.Add(ksiaz);
+    ksiaz[ksiaz.size() - 1]->Show();
 
+    //zbior = PrzedmiotPeopleGet("buff.txt");
+    ///*Ksiazka k;
+    //k.Add(ksiaz);*/
 
-    zbior = PrzedmiotPeopleGet("buff.txt");
-    /*Ksiazka k;
-    k.Add(ksiaz);*/
-
-    User n = zbior[0].first;
-    Menu m;
-    m.MyKonto(n, zbior);
+    //User n = zbior[0].first;
+    //Menu m;
+    //m.MyKonto(n, zbior);
 
     
 
 
     
-    PeopleSave("users.txt", u);
+   /* PeopleSave("users.txt", u);
     PrzedmiotSave("book.txt", ksiaz);
-    PrzedmiotPeopleSave(zbior, "buff.txt");
+    PrzedmiotPeopleSave(zbior, "buff.txt");*/
     
     /*Ksiazka k; 
     k.Modify(ksiaz[1]);

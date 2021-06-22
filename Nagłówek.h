@@ -77,6 +77,26 @@ public:
 
 };
 
+class DVD : public Przedmiot
+{
+	string genre;
+
+public:
+	DVD(string, string, string, int, string, bool);
+	DVD() :Przedmiot(), genre("h") {};
+	string Genre();
+	//Ksiazka& setGenre();
+	void Show();
+	void Add(vector<Przedmiot*>& lista);
+	bool Delete(string bookId, vector<Przedmiot*>& lista);
+	void Modify(Przedmiot*& book);
+
+	friend istream& operator>>(istream& s, DVD& d);
+	friend ostream& operator<<(ostream& s, DVD& d);
+
+
+};
+
 class User
 {
 private:
