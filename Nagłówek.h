@@ -3,6 +3,8 @@
 #include<vector>
 #include<list>
 #include<map>
+#include<conio.h>
+
 using namespace std;
 
 class Przedmiot
@@ -156,7 +158,7 @@ public:
 	//void Admin();
 	void Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 	void Delete(int person, baza& issued, vector<User*>&);
-	Konto Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
+	User Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
 	bool Oddaj(User* person,Przedmiot* p, baza& issued, vector<Przedmiot*>&);
 	bool Books(User person, baza issued);
 	bool Gry(User person, baza issued);
@@ -169,9 +171,9 @@ class Menu
 public:
 	Menu() {};
 	User Login(vector<User*> members);
-	Konto Register(vector<User*> members, baza zbior);
+	User Register(vector<User*> &members, baza &zbior);
 	void Search(vector<Przedmiot*> books);
-	void Admin(baza zbior, vector<Przedmiot*> &books, vector<User*> members);
+	void Admin(baza &zbior, vector<Przedmiot*> &books, vector<User*> &members);
 	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book);
 	void Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
 	void Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
@@ -190,3 +192,5 @@ public:
 int IdMaker(int);
 int LastId(vector<User*>& users);
 Przedmiot* getPrzedmiot(string id,vector<Przedmiot*> book);
+User Panel1(baza issued, vector<User*> members,vector<Przedmiot*> books);
+void PokaNowe(vector<Przedmiot*> books);

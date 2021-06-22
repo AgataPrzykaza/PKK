@@ -258,7 +258,7 @@ void Konto::Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued
 
 }
 
-Konto Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
+User Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
 {
 	int id;
 
@@ -287,7 +287,7 @@ Konto Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&
 	users.push_back(newUser);
 
 	Konto nowy(id, name, email, haslo);
-	return nowy ;
+	return *newUser;
 }
 bool Konto::Oddaj(User* person,Przedmiot*p, baza& issued, vector<Przedmiot*>& books) //ok
 {

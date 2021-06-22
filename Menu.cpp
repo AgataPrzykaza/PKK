@@ -1,6 +1,7 @@
 #include"Nag³ówek.h"
 
-void Menu::Admin(baza zbior,vector<Przedmiot*> &books,vector<User*> members)
+
+void Menu::Admin(baza &zbior,vector<Przedmiot*> &books,vector<User*> &members)
 {
 	
 	int option;
@@ -189,17 +190,17 @@ User Menu::Login(vector<User*> members) //ok
 	
 }
 
-Konto Menu::Register(vector<User*> members, baza zbior)//ok
+User Menu::Register(vector<User*> &members, baza &zbior)//ok
 {
 	Konto person;
-	person=person.Add(zbior, members);
+	User nowy=person.Add(zbior, members);
 	cout << "Konto utowrzone !!" << endl;
 	cout << "Wcisnij klawisz by przejsc dalej";
 	if (cin.get())
 	{
-		return person;
+		return nowy;
 	}
-	return person;
+	return nowy;
 }
 
 void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book)
@@ -802,7 +803,7 @@ void Menu::Search(vector<Przedmiot*> books)
 	char z;
 	cout << "\t\tWYSZUKIWANIE\n";
 	cout << "1.Ksiazek\n" << "2.Gier\n" << "3.DVD\n"<<"4.CD\n";
-	cin >> z;
+	cin.get(z);
 	Searching szukac;
 	if (z =='1')
 	{
@@ -936,8 +937,57 @@ void Menu::Search(vector<Przedmiot*> books)
 		}
 
 	}
+	if (z == '\n')
+	{
+		PokaNowe(books);
+		cout << "Wyjscie-enter";
+		if (cin.get())
+			return;
+	}
 	else
 	{
 		return;
 	}
+}
+
+User Panel1(baza &issued, vector<User*> &members,vector<Przedmiot*> books)
+{
+	Menu ja;
+	cout << "\t\t BIBLIOTEKA\n";
+	cout << "1.Zaloguj sie\n";
+	cout << "2.Zarejestruj sie\n";
+	cout << "3.Wyszukiwanie(tylko do wyswietlenia)\n";
+	int o;
+	cin >> o;
+	if (o == 1)
+	{
+		return ja.Login(members);
+
+	}
+	if (o == 2)
+	{
+		return ja.Register(members, issued);
+	}
+	if (o == 3)
+	{
+		ja.Search(books);
+		User u(0, "", "", "");
+		return u;
+	}
+	else
+	{
+		cout << " :( Nie ma takiej opcji\n";
+		User u(0, "", "", "");
+		return u;
+	}
+	
+}
+//moze while(1) by caly czas program trwal i mozna wrocic
+
+void Panel2(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
+{
+	cout << "\t\t ZALOGOWANY\n";
+	cout << "1.Ksiazki\n2.Gry\n3.CD\n4.DVD\n5.Administracja\n5.Moje Konto\n";
+	cout << "6.Wyjdz";
+	
 }

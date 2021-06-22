@@ -2,7 +2,7 @@
 #include <iostream>
 #include<fstream>
 #include<sstream>
-
+#include<stdlib.h>
 #include"Nagłówek.h"
 using namespace std;
 
@@ -13,6 +13,7 @@ void PeopleSave(const string& exitFile, vector<User*> users);
 void PrzedmiotSave(const string& exitFile, vector<Przedmiot*>books);
 void PokaNowe(vector<Przedmiot*> books)
 {
+    cout << "Nowo dodane!!\n";
     string s;
     for (int i = books.size()-1;i>books.size()-7; i--)
     {
@@ -43,12 +44,11 @@ int main()
 
    zbior = PrzedmiotPeopleGet("buff.txt");
 
-  
-   Searching s;
-   s.SearchByTitle(ksiaz);
+   //Panel1(zbior,u);
+  // system("cls");
 
 
-   PrzedmiotSave("book.txt", ksiaz);
+  // PrzedmiotSave("book.txt", ksiaz);
    /*Konto ja;
    ja.Oddaj(u[1], ksiaz[3], zbior, ksiaz);
    cout << zbior[1].second.size();
