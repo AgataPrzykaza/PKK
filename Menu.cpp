@@ -255,7 +255,7 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 		cin >> option;
 		if (option == 1)
 		{
-			szukanie.SearchByTitle(book);
+			szukanie.SearchByTitle('K', book);
 			cout << "Chcesz wypozyczyc ksiazke T/N ?"<<endl;
 			cin >> k;
 			if (k == 'T')
@@ -281,7 +281,7 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 		}
 		if (option== 2)
 		{
-			szukanie.SearchByAutor(book);
+			szukanie.SearchByAutor('K',book);
 			cout << "Chcesz wypozyczyc ksiazke T/N ?" << endl;
 			cin >> k;
 			if (k == 'T')
@@ -306,7 +306,7 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 		}
 		if (option == 3)
 		{
-			szukanie.SearchByYear(book);
+			szukanie.SearchByYear('K',book);
 			cout << "Chcesz wypozyczyc ksiazke T/N ?" << endl;
 			cin >> k;
 			if (k == 'T')
@@ -331,7 +331,7 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 		}
 		if (option == 4)
 		{
-			szukanie.SearchByGenre(book);
+			szukanie.SearchByGenre('K',book);
 			cout << "Chcesz wypozyczyc ksiazke T/N ?" << endl;
 			cin >> k;
 			if (k == 'T')
@@ -406,11 +406,11 @@ void Menu::Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 	{
 		Searching szukanie;
 		cout << "\t\t WYSZUKIWANIE" << endl;
-		cout << "1.Po tytule 2.Po autorze 3.Po roku wydania 4.Po gatunku" << endl;
+		cout << "1.Po tytule 2.Po autorze 3.Po roku wydania" << endl;
 		cin >> option;
 		if (option == 1)
 		{
-			szukanie.SearchByTitle(book);
+			szukanie.SearchByTitle('G',book);
 			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
 			cin >> k;
 			if (k == 'T')
@@ -436,7 +436,7 @@ void Menu::Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 		}
 		if (option == 2)
 		{
-			szukanie.SearchByAutor(book);
+			szukanie.SearchByAutor('G',book);
 			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
 			cin >> k;
 			if (k == 'T')
@@ -461,7 +461,7 @@ void Menu::Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 		}
 		if (option == 3)
 		{
-			szukanie.SearchByYear(book);
+			szukanie.SearchByYear('G',book);
 			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
 			cin >> k;
 			if (k == 'T')
@@ -484,31 +484,7 @@ void Menu::Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 			}
 
 		}
-		if (option == 4)
-		{
-			szukanie.SearchByGenre(book);
-			cout << "Chcesz wypozyczyc gre T/N ?" << endl;
-			cin >> k;
-			if (k == 'T')
-			{
-				Konto me;
-				cout << "Podaj jej id: ";
-				cin >> s;
-				me.Issue(&person, getPrzedmiot(s, book), issued, book);
-				cout << "Gra wypozyczona" << endl;
-				cout << "Enter by wyjsc";
-				if (cin.get())
-				{
-					return;
-				}
-
-			}
-			if (k == 'N')
-			{
-				return;
-			}
-
-		}
+		
 	}
 	if (option == 2)
 	{
@@ -551,5 +527,417 @@ void Menu::Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 
 void Menu::Multimedia(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*> &book)
 {
+	cout << "\t\t Multimedia" << endl;
+	cout << "1.Wyszukaj CD lub DVD" << endl << "2.Pokaz moje multimedia" << endl << "3.Wyjdz" << endl;
+	int option;
+	cin >> option;
+	char k;
+	string s;
+	if (option == 1)
+	{
+		Searching szukanie;
+		cout << "\t\t WYSZUKIWANIE" << endl;
+		cout << "1.DVD 2.CD" << endl;
+		cin >> option;
+		if (option == 1)
+		{
+			cout << "\t\tDVD\n";
+			cout << "1.Po tytule 2.Po autorze 3.Po roku wydania 4.Po gatunku" << endl;
+			cin >> option;
+			if (option == 1)
+			{
+				szukanie.SearchByTitle('D', book);
+				cout << "Chcesz wypozyczyc multimedia T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczony" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
 
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+
+			}
+
+			if (option == 2)
+			{
+				szukanie.SearchByAutor('D', book);
+				cout << "Chcesz wypozyczyc dvd T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczony" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+			}
+			if (option == 3)
+			{
+				szukanie.SearchByYear('D', book);
+				cout << "Chcesz wypozyczyc przedmiot T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczony" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+			}
+			if (option == 4)
+			{
+				szukanie.SearchByGenre('D', book);
+				cout << "Chcesz wypozyczyc multimedia T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczona" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+			}
+		}
+		if (option == 2)
+		{
+			cout << "\t\tCD\n";
+			cout << "1.Po tytule 2.Po autorze 3.Po roku wydania 4.Po gatunku" << endl;
+			cin >> option;
+			if (option == 1)
+			{
+				szukanie.SearchByTitle('C', book);
+				cout << "Chcesz wypozyczyc multimedia T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczony" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+
+			}
+
+			if (option == 2)
+			{
+				szukanie.SearchByAutor('C', book);
+				cout << "Chcesz wypozyczyc cd T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczony" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+			}
+			if (option == 3)
+			{
+				szukanie.SearchByYear('C', book);
+				cout << "Chcesz wypozyczyc przedmiot T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczony" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+			}
+			if (option == 4)
+			{
+				szukanie.SearchByGenre('C', book);
+				cout << "Chcesz wypozyczyc multimedia T/N ?" << endl;
+				cin >> k;
+				if (k == 'T')
+				{
+					Konto me;
+					cout << "Podaj jej id: ";
+					cin >> s;
+					me.Issue(&person, getPrzedmiot(s, book), issued, book);
+					cout << "Przedmiot wypozyczona" << endl;
+					cout << "Enter by wyjsc";
+					if (cin.get())
+					{
+						return;
+					}
+
+				}
+				if (k == 'N')
+				{
+					return;
+				}
+
+			}
+		}
+	}
+	if (option == 2)
+	{
+		Konto me;
+		if (me.DVD(person, issued) == 1||me.CD(person,issued)==1)
+		{
+			cout << "Chcesz oddac jakis przedmiot (T/N) ?" << endl;
+			cin >> k;
+			if (k == 'T')
+			{
+				cout << "Podaj id : ";
+				cin >> s;
+				me.Oddaj(&person, getPrzedmiot(s, book), issued, book);
+				cout << "Przedmiot oddany";
+				cout << "Enter by wyjsc";
+				if (cin.get())
+					return;
+
+			}
+		}
+		else
+		{
+			cout << "Brak wypozyczonych multimediow\n";
+			cout << "Enter by wyjsc";
+			if (cin.get())
+				return;
+		}
+
+	}
+	if (option == 3)
+	{
+		return;
+	}
+	else
+	{
+		return;
+	}
+
+
+
+}
+
+void Menu::Search(vector<Przedmiot*> books)
+{
+	char z;
+	cout << "\t\tWYSZUKIWANIE\n";
+	cout << "1.Ksiazek\n" << "2.Gier\n" << "3.DVD\n"<<"4.CD\n";
+	cin >> z;
+	Searching szukac;
+	if (z =='1')
+	{
+		cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
+		cin >> z;
+		if (z == '1')
+		{
+			szukac.SearchByTitle('K',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '2')
+		{
+			szukac.SearchByAutor('K',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '3')
+		{
+			szukac.SearchByYear('K',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '4')
+		{
+			szukac.SearchByGenre('K',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+	}
+
+	if (z == '2')
+	{
+		cout << "1-Tytul,2-Autor,3-Rok" << endl;
+		cin >> z;
+		if (z == '1')
+		{
+			szukac.SearchByTitle('G',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '2')
+		{
+			szukac.SearchByAutor('G',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '3')
+		{
+			szukac.SearchByYear('G',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		
+	}
+
+	if (z == '3')
+	{
+		cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
+		cin >> z;
+		if (z == '1')
+		{
+			szukac.SearchByTitle('D',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '2')
+		{
+			szukac.SearchByAutor('D',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '3')
+		{
+			szukac.SearchByYear('D',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (z == '4')
+		{
+			szukac.SearchByGenre('D',books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+	}
+	if (z == 4)
+	{
+		if (z == '1')
+		{
+			cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
+			cin >> z;
+			if (z == '1')
+			{
+				szukac.SearchByTitle('C', books);
+				cout << "Wyjscie-enter";
+				if (cin.get())
+					return;
+			}
+			if (z == '2')
+			{
+				szukac.SearchByAutor('C', books);
+				cout << "Wyjscie-enter";
+				if (cin.get())
+					return;
+			}
+			if (z == '3')
+			{
+				szukac.SearchByYear('C', books);
+				cout << "Wyjscie-enter";
+				if (cin.get())
+					return;
+			}
+			if (z == '4')
+			{
+				szukac.SearchByGenre('C', books);
+				cout << "Wyjscie-enter";
+				if (cin.get())
+					return;
+			}
+		}
+
+	}
+	else
+	{
+		return;
+	}
 }

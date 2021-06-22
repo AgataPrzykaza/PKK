@@ -170,7 +170,7 @@ public:
 	Menu() {};
 	User Login(vector<User*> members);
 	Konto Register(vector<User*> members, baza zbior);
-	void Search();
+	void Search(vector<Przedmiot*> books);
 	void Admin(baza zbior, vector<Przedmiot*> &books, vector<User*> members);
 	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book);
 	void Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
@@ -181,10 +181,10 @@ class Searching
 {
 public:
 	Searching() {};
-	void SearchByTitle(vector<Przedmiot*> books);
-	void SearchByAutor(vector<Przedmiot*> books);
-	void SearchByYear(vector<Przedmiot*> books);
-	void SearchByGenre(vector<Przedmiot*> books);
+	void SearchByTitle(char,vector<Przedmiot*> books);
+	void SearchByAutor(char z,vector<Przedmiot*> books);
+	void SearchByYear(char z,vector<Przedmiot*> books);
+	void SearchByGenre(char z,vector<Przedmiot*> books);
 
 };
 int IdMaker(int);

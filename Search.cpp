@@ -1,7 +1,7 @@
 #include"Nag³ówek.h"
 
 
-void Searching::SearchByTitle(vector<Przedmiot*> books)
+void Searching::SearchByTitle(char z,vector<Przedmiot*> books)
 {
 	string s;
 	cout << "Szunkanie po tytule" << endl;
@@ -10,7 +10,7 @@ void Searching::SearchByTitle(vector<Przedmiot*> books)
 	bool b = 0;
 	for (auto i : books)
 	{
-		if (i->Title() == s&& i->Available()==1)
+		if (i->Title() == s&& i->Available()==1&&z==i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -18,7 +18,7 @@ void Searching::SearchByTitle(vector<Przedmiot*> books)
 	}
 	for (auto i : books)
 	{
-		if (i->Title() == s && i->Available() == 0)
+		if (i->Title() == s && i->Available() == 0 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -31,7 +31,7 @@ void Searching::SearchByTitle(vector<Przedmiot*> books)
 
 }
 
-void Searching::SearchByAutor(vector<Przedmiot*> books)
+void Searching::SearchByAutor(char z,vector<Przedmiot*> books)
 {
 	string s;
 	cout << "Szunkanie po autorze" << endl;
@@ -40,7 +40,7 @@ void Searching::SearchByAutor(vector<Przedmiot*> books)
 	bool b = 0;
 	for (auto i : books)
 	{
-		if (i->Autor() == s&& i->Available()==1)
+		if (i->Autor() == s&& i->Available()==1 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -48,7 +48,7 @@ void Searching::SearchByAutor(vector<Przedmiot*> books)
 	}
 	for (auto i : books)
 	{
-		if (i->Autor() == s && i->Available() == 0)
+		if (i->Autor() == s && i->Available() == 0 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -60,7 +60,7 @@ void Searching::SearchByAutor(vector<Przedmiot*> books)
 	}
 }
 
-void Searching::SearchByYear(vector<Przedmiot*> books)
+void Searching::SearchByYear(char z,vector<Przedmiot*> books)
 {
 	int s;
 	cout << "Szunkanie po roku wydania" << endl;
@@ -69,7 +69,7 @@ void Searching::SearchByYear(vector<Przedmiot*> books)
 	bool b = 0;
 	for (auto i : books)
 	{
-		if (i->Year() == s&&i->Available()==1)
+		if (i->Year() == s&&i->Available()==1 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -77,7 +77,7 @@ void Searching::SearchByYear(vector<Przedmiot*> books)
 	}
 	for (auto i : books)
 	{
-		if (i->Year() == s && i->Available() == 0)
+		if (i->Year() == s && i->Available() == 0 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -90,7 +90,7 @@ void Searching::SearchByYear(vector<Przedmiot*> books)
 	}
 }
 
-void Searching::SearchByGenre(vector<Przedmiot*> books)
+void Searching::SearchByGenre(char z,vector<Przedmiot*> books)
 {
 	string s;
 	cout << "Szunkanie po gatunku" << endl;
@@ -101,7 +101,7 @@ void Searching::SearchByGenre(vector<Przedmiot*> books)
 	for (auto i : books)
 	{
 		k = dynamic_cast<Ksiazka*>(i);
-		if (k->Genre() == s&&k->Available()==1)
+		if (k->Genre() == s&&k->Available()==1 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
@@ -110,7 +110,7 @@ void Searching::SearchByGenre(vector<Przedmiot*> books)
 	for (auto i : books)
 	{
 		k = dynamic_cast<Ksiazka*>(i);
-		if (k->Genre() == s && k->Available() == 0)
+		if (k->Genre() == s && k->Available() == 0 && z == i->Id()[0])
 		{
 			i->Show();
 			b = 1;
