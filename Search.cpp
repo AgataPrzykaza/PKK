@@ -10,7 +10,15 @@ void Searching::SearchByTitle(vector<Przedmiot*> books)
 	bool b = 0;
 	for (auto i : books)
 	{
-		if (i->Title() == s)
+		if (i->Title() == s&& i->Available()==1)
+		{
+			i->Show();
+			b = 1;
+		}
+	}
+	for (auto i : books)
+	{
+		if (i->Title() == s && i->Available() == 0)
 		{
 			i->Show();
 			b = 1;
@@ -32,7 +40,15 @@ void Searching::SearchByAutor(vector<Przedmiot*> books)
 	bool b = 0;
 	for (auto i : books)
 	{
-		if (i->Autor() == s)
+		if (i->Autor() == s&& i->Available()==1)
+		{
+			i->Show();
+			b = 1;
+		}
+	}
+	for (auto i : books)
+	{
+		if (i->Autor() == s && i->Available() == 0)
 		{
 			i->Show();
 			b = 1;
@@ -53,12 +69,21 @@ void Searching::SearchByYear(vector<Przedmiot*> books)
 	bool b = 0;
 	for (auto i : books)
 	{
-		if (i->Year() == s)
+		if (i->Year() == s&&i->Available()==1)
 		{
 			i->Show();
 			b = 1;
 		}
 	}
+	for (auto i : books)
+	{
+		if (i->Year() == s && i->Available() == 0)
+		{
+			i->Show();
+			b = 1;
+		}
+	}
+
 	if (b == 0)
 	{
 		cout << "Przkro nam nie ma takich przedmiotow w bazie";
@@ -76,7 +101,16 @@ void Searching::SearchByGenre(vector<Przedmiot*> books)
 	for (auto i : books)
 	{
 		k = dynamic_cast<Ksiazka*>(i);
-		if (k->Genre() == s)
+		if (k->Genre() == s&&k->Available()==1)
+		{
+			i->Show();
+			b = 1;
+		}
+	}
+	for (auto i : books)
+	{
+		k = dynamic_cast<Ksiazka*>(i);
+		if (k->Genre() == s && k->Available() == 0)
 		{
 			i->Show();
 			b = 1;

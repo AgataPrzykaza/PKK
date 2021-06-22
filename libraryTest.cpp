@@ -17,27 +17,7 @@ void PokaNowe(vector<Przedmiot*> books)
     for (int i = books.size()-1;i>books.size()-7; i--)
     {
        
-        if (s.find("K") != string::npos)
-        {
-            Ksiazka k = *(dynamic_cast<Ksiazka*>  (books[i]));
-
-            cout << k;
-        }
-        else
-        {
-            /*if (s.find("G") != string::npos)
-            {
-                  Gra g=books[i];
-                  cout<<g;
-
-            }*/
-            /*if (s.find("C") != string::npos || s.find("D")!=string::npos)
-            {
-                  DVD_CD d=*(dynamic_cast<DVD_CD*>  (books[i]));
-                  cout<<d;
-
-            }*/
-        }
+        books[i]->Show();
     }
 }
 void PrzedmiotPeopleSave(baza zbior, const string& exitFile);

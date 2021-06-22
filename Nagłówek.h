@@ -169,7 +169,7 @@ public:
 	void Search();
 	void Admin(baza zbior, vector<Przedmiot*> &books, vector<User*> members);
 	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book);
-	void Books();
+	void Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
 	void Games();
 	void Multimedia();
 };

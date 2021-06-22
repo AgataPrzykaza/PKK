@@ -239,7 +239,47 @@ void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,
 	return;
 }
 
-void Menu::Books()
+void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book)
 {
+	cout << "\t\t Ksiazki" << endl;
+	cout << "1.Wyszukaj ksiazke" << endl<<"2.Pokaz moje ksiazki" << endl << "3.Wyjdz" << endl;
+	int option;
+	cin >> option;
+	char k;
+	if (option == 1)
+	{
+		Searching szukanie;
+		cout << "\t\t WYSZUKIWANIE" << endl;
+		cout << "1.Po tytule 2.Po autorze 3.Po roku wydania 4.Po gatunku" << endl;
+		cin >> option;
+		if (option == 1)
+		{
+			szukanie.SearchByTitle(book);
+			cout << "Chcesz wypozyczyc ksiazke T/N ?"<<endl;
+			cin >> k;
+			if (k == 'T')
+			{
+
+			}
+			if (k == 'N')
+			{
+
+			}
+			
+
+		}
+	}
+	if (option == 2)
+	{
+
+	}
+	if (option == 3)
+	{
+		return;
+	}
+	else
+	{
+		return;
+	}
 
 }
