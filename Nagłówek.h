@@ -36,6 +36,7 @@ public:
 	virtual bool Delete(string bookId,vector<Przedmiot*>& lista) = 0;
 	virtual void Modify(Przedmiot*& book) = 0;
 	virtual void Show() = 0;
+	virtual string Gatunek() = 0;
 
 	//virtual friend istream& operator>>(istream& s, Przedmiot* &k)=0;
 	//virtual friend ostream& operator<<(ostream& s, Przedmiot* &k);
@@ -54,6 +55,7 @@ public:
 	void Add(vector<Przedmiot*>& lista);
 	bool Delete(string bookId,vector<Przedmiot*>& lista);
 	void Modify(Przedmiot* &book);
+	string Gatunek();
 
 	friend istream& operator>>(istream& s, Ksiazka &k);
 	friend ostream& operator<<(ostream& s, Ksiazka &k);
@@ -72,6 +74,7 @@ public:
 	void Add(vector<Przedmiot*>& lista);
 	bool Delete(string bookId, vector<Przedmiot*>& lista);
 	void Modify(Przedmiot*& book);
+	string Gatunek() { return ""; };
 
 	friend istream& operator>>(istream& s, Gra& g);
 	friend ostream& operator<<(ostream& s, Gra& g);
@@ -92,6 +95,7 @@ public:
 	void Add(vector<Przedmiot*>& lista);
 	bool Delete(string bookId, vector<Przedmiot*>& lista);
 	void Modify(Przedmiot*& book);
+	string Gatunek();
 
 	friend istream& operator>>(istream& s, DVD& d);
 	friend ostream& operator<<(ostream& s, DVD& d);
@@ -111,6 +115,7 @@ public:
 	void Add(vector<Przedmiot*>& lista);
 	bool Delete(string bookId, vector<Przedmiot*>& lista);
 	void Modify(Przedmiot*& book);
+	string Gatunek();
 
 	friend istream& operator>>(istream& s, CD& d);
 	friend ostream& operator<<(ostream& s, CD& d);
@@ -164,6 +169,7 @@ public:
 	bool Gry(User person, baza issued);
 	bool DVD(User person, baza issued);
 	bool CD(User person, baza issued);
+	void Aktual(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users);
 };
 
 class Menu
@@ -174,7 +180,7 @@ public:
 	User Register(vector<User*> &members, baza &zbior);
 	void Search(vector<Przedmiot*> books);
 	void Admin(baza &zbior, vector<Przedmiot*> &books, vector<User*> &members);
-	void MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book);
+	void MyKonto(User &person, vector< pair<User, vector<Przedmiot*>>>& issued,vector<Przedmiot*> &book,vector<User*> &members);
 	void Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
 	void Games(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
 	void Multimedia(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book);
@@ -183,10 +189,10 @@ class Searching
 {
 public:
 	Searching() {};
-	void SearchByTitle(char,vector<Przedmiot*> books);
-	void SearchByAutor(char z,vector<Przedmiot*> books);
-	void SearchByYear(char z,vector<Przedmiot*> books);
-	void SearchByGenre(char z,vector<Przedmiot*> books);
+	bool SearchByTitle(char,vector<Przedmiot*> books);
+	bool SearchByAutor(char z,vector<Przedmiot*> books);
+	bool SearchByYear(char z,vector<Przedmiot*> books);
+	bool SearchByGenre(char z,vector<Przedmiot*> books);
 
 };
 int IdMaker(int);

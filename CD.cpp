@@ -136,6 +136,10 @@ void CD::Modify(Przedmiot*& book)//ok
 	book = k;
 }
 
+string CD::Gatunek()
+{
+	return genre;
+}
 istream& operator>>(istream& s, CD& d)
 {
 

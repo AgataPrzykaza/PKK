@@ -114,7 +114,7 @@ void Konto::Issue(User* person, Przedmiot* book, vector< pair<User,vector<Przedm
 	pair<User, vector<Przedmiot*>> conection{*person,issue};
 	char check='n';
 	for (auto &l : issued)
-	{
+	{ 
 		if (l.first.getID() == person->getID())
 		{	
 			book->setAvailable(0);
@@ -146,6 +146,7 @@ void Konto::Delete(int person, baza& issued, vector<User*>& users) //ok
 	
 	for (auto l : issued)
 	{
+		
 		if (l.first.getID() == person)
 		{			
 			if (l.second.size() != 0)
@@ -160,6 +161,7 @@ void Konto::Delete(int person, baza& issued, vector<User*>& users) //ok
 			}
 			issued.erase(issued.begin() + cnt);
 		}
+		cnt++;
 	}
 		cnt = 0;
 	for (auto i:users)
@@ -242,29 +244,96 @@ void Konto::Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued
 		break;
 	}
 
-	
+	int cnt = 0;
 	if (id == 0)
 	{
 		for (auto &i: users)
 		{
 			if (i->getID() == person.getID())
 			{
-				i = &person;
-				
+				users.erase(users.begin() + cnt);
+
 				break;
 			}
+			cnt++;
 			
 		}
+		users.push_back(&person);
+		cnt = 0;
+		pair < User, vector<Przedmiot*>> l;
 		for (auto &i : issued)
 		{
 			if (i.first.getID() == person.getID())
 			{
-				i.first = person;
+				l = { person,i.second };
+				issued.erase(issued.begin() + cnt);
 				break;
 			}
+			cnt++;
 		}
+		issued.push_back(l);
 	}
 
+}
+
+void Konto::Aktual(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users)
+{
+	int option;
+	string  email, password;
+	
+
+	cout << "Modyfikacja : " << endl;
+	cout << "1.Email'a" << endl<<"2.Hasla" <<endl;
+	cin >> option;
+	
+	switch (option)
+	{
+	case 1:
+	{
+		cout << "Podaj nowy email: ";
+		cin >> email;
+		person.setEmail(email);
+		break;
+	}
+	case 2:
+	{
+		cout << "Podaj nowe haslo: ";
+		cin >> password;
+		person.setHaslo(password);
+		break;
+	}
+	default:
+		break;
+	}
+	int cnt = 0;
+	User* tmp = &person;
+		for (auto& i : users)
+		{
+			
+			if (i->getID() == person.getID())
+			{
+				users.erase(users.begin() + cnt);
+
+				break;
+			}
+				cnt++;
+		}
+		users.push_back(tmp);
+		cnt = 0;
+		pair < User, vector<Przedmiot*>> l;
+		for (auto& i : issued)
+		{
+			
+			if (i.first.getID() == person.getID())
+			{
+				l = { person,i.second };
+				issued.erase(issued.begin() + cnt);
+				break;
+			}
+			cnt++;
+		}
+		issued.push_back(l);
+	
 }
 
 User Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
@@ -334,14 +403,14 @@ bool Konto::Oddaj(User* person,Przedmiot*p, baza& issued, vector<Przedmiot*>& bo
 bool Konto::Books(User person, baza issued)
 {
 	cout << "\t\tMoje wypozyczone " << endl;
-
+	bool bylo = 0;
 	for (auto i : issued)
 	{
 		if (i.first.getID() == person.getID())
 		{
 			if (i.second.size() == 0)
 			{
-				return 0;
+				return bylo;
 
 			}
 			for (auto l : i.second)
@@ -349,28 +418,29 @@ bool Konto::Books(User person, baza issued)
 				if (l->Id()[0] == 'K')
 				{
 					l->Show();
+					bylo = 1;
 				}
 				
 			}
-			return 1;
+			
 		}
 
 	}
 	
-	return 0;
+	return bylo;
 }
 
 bool Konto::Gry(User person, baza issued)
 {
 	cout << "\t\tMoje wypozyczone " << endl;
-
+	bool bylo = 0;
 	for (auto i : issued)
 	{
 		if (i.first.getID() == person.getID())
 		{
 			if (i.second.size() == 0)
 			{
-				return 0;
+				return bylo;
 
 			}
 			for (auto l : i.second)
@@ -378,27 +448,28 @@ bool Konto::Gry(User person, baza issued)
 				if (l->Id()[0] == 'G')
 				{
 					l->Show();
+					bylo = 1;
 				}
 
 			}
-			return 1;
+			
 		}
 
 	}
-	return 0;
+	return bylo;
 }
 
 bool Konto::DVD(User person, baza issued)
 {
 	cout << "\t\tMoje wypozyczone " << endl;
-
+	bool bylo;
 	for (auto i : issued)
 	{
 		if (i.first.getID() == person.getID())
 		{
 			if (i.second.size() == 0)
 			{
-				return 0;
+				return bylo;
 
 			}
 			for (auto l : i.second)
@@ -406,28 +477,30 @@ bool Konto::DVD(User person, baza issued)
 				if (l->Id()[0] == 'D')
 				{
 					l->Show();
+					bylo = 1;
 				}
 
 			}
-			return 1;
+			
 		}
 
 	}
-	return 0;
+	
+	return bylo;
 	
 }
 
 bool Konto::CD(User person, baza issued)
 {
-	cout << "\t\tMoje wypozyczone " << endl;
 	
+	bool bylo = 0;
 	for (auto i : issued)
 	{
 		if (i.first.getID() == person.getID())
 		{
 			if (i.second.size() == 0)
 			{
-				return 0;
+				return bylo;
 				
 			}
 			for (auto l : i.second)
@@ -435,14 +508,16 @@ bool Konto::CD(User person, baza issued)
 				if (l->Id()[0] == 'C')
 				{
 					l->Show();
+					bylo = 1;
 				}
 
 			}
-			return 1;
+		
 		}
 
 	}
-	return 0;
+	
+	return bylo;
 	
 }
 

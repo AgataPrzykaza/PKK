@@ -147,6 +147,10 @@ Przedmiot* getPrzedmiot(string id,vector<Przedmiot*> book)
 	}
 
 }
+string Ksiazka::Gatunek()
+{
+	return genre;
+}
 
 istream& operator>>(istream& s, Ksiazka& k)
 {

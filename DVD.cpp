@@ -136,7 +136,10 @@ void DVD::Modify(Przedmiot*& book)//ok
 	}
 	book = k;
 }
-
+string DVD::Gatunek()
+{
+	return genre;
+}
 istream& operator>>(istream& s, DVD& d)
 {
 

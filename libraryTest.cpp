@@ -18,7 +18,7 @@ void PokaNowe(vector<Przedmiot*> books)
     system("cls");
     cout << "\t\tNowo dodane!!\n";
     string s;
-    for (int i = books.size()-1;i>books.size()-7; i--)
+    for (int i = books.size()-1;i>books.size()-10; i--)
     {
        
         books[i]->Show();
@@ -27,9 +27,9 @@ void PokaNowe(vector<Przedmiot*> books)
 void PrzedmiotPeopleSave(baza zbior, const string& exitFile);
 vector<Przedmiot*> PrzedmiotGet(const string& fileName);
 baza PrzedmiotPeopleGet(const string& fileName);
-void Panel2(User u, baza& issued, vector<User*>& members, vector<Przedmiot*> book);
+void Panel2(User u, baza& issued, vector<User*>& members, vector<Przedmiot*> &book);
 
-User Panel1(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
+User Panel1(baza& issued, vector<User*>& members, vector<Przedmiot*> &books)
 {
     system("cls");
     Menu ja;
@@ -37,6 +37,7 @@ User Panel1(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
     cout << "1.Zaloguj sie\n";
     cout << "2.Zarejestruj sie\n";
     cout << "3.Wyszukiwanie(tylko do wyswietlenia)\n";
+    cout << "4.Wyjdz\n";
     int o;
     cin >> o;
     if (o == 1)
@@ -54,12 +55,19 @@ User Panel1(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
         User u(0, "", "", "");
         return u;
     }
+    if (o == 4)
+    {
+        User u(0, "", "", "");
+        return u;
+       
+    }
     else
     {
         cout << " :( Nie ma takiej opcji\n";
         User u(0, "", "", "");
         return u;
     }
+
 
 }
 
@@ -109,13 +117,26 @@ int main()
     cout << zbior[zbior.size() - 1].first;*/
 
    zbior = PrzedmiotPeopleGet("save.txt");
+  /* Konto ja;
+   ja.Modify(*u[0], zbior, u);
+   cout << *u[u.size() - 1];
+   cout << zbior[zbior.size() - 1].first;
+   PeopleSave("users.txt", u);
+   PrzedmiotPeopleSave(zbior, "save.txt");*/
+
+   /*ja.Aktual(*u[0], zbior, u);
+   cout << *u[u.size()-1];
+  PeopleSave("users.txt", u);*/
    
 
+
+    
     User kolo = Panel1(zbior,u, ksiaz);
     Panel2(kolo, zbior, u, ksiaz);
     PrzedmiotPeopleSave(zbior, "save.txt");
     PrzedmiotSave("przedmioty.txt", ksiaz);
     PeopleSave("users.txt", u);
+  
    
    
    //Program(zbior, u, ksiaz);
@@ -158,7 +179,7 @@ int main()
     
 }
 
-void Panel2(User u,baza& issued, vector<User*>& members, vector<Przedmiot*> book)
+void Panel2(User u,baza& issued, vector<User*>& members, vector<Przedmiot*> &book)
 {
     int o;
     Menu m;
@@ -210,20 +231,18 @@ void Panel2(User u,baza& issued, vector<User*>& members, vector<Przedmiot*> book
     }
     if(o==5)
     {
-        m.MyKonto(u, issued, book);
+        m.MyKonto(u, issued, book,members);
         cout << endl << "enter-wyjscie";
         if (cin.get())
         Panel2(u, issued, members, book);
     }
     if (o == 6)
     {
+        if (Panel1(issued, members, book).getID() == 0)
+            return;
+        else
+        Panel2(Panel1(issued, members, book), issued, members, book);
         
-       
-       Panel2(Panel1(issued, members, book), issued, members, book);
-    }
-    else
-    {
-        return;
     }
 
 }
@@ -272,9 +291,30 @@ void PrzedmiotSave(const string& exitFile, vector<Przedmiot*>books)// save przed
     ofstream plik(exitFile);
     for (int i=0;i<books.size();i++)
     {
-        Ksiazka k=*(dynamic_cast<Ksiazka*>  (books[i]));
+        if (books[i]->Id()[0] == 'K')
+        {
+            Ksiazka k=*(dynamic_cast<Ksiazka*>  (books[i]));
         
-        plik << k << endl;
+            plik << k << endl;
+        }
+        if (books[i]->Id()[0] == 'D')
+        {
+           DVD k = *(dynamic_cast<DVD*>  (books[i]));
+
+            plik << k << endl;
+        }
+        if (books[i]->Id()[0] == 'C')
+        {
+            CD k = *(dynamic_cast<CD*>  (books[i]));
+
+            plik << k << endl;
+        }
+        if (books[i]->Id()[0] == 'G')
+        {
+            Gra g = *(dynamic_cast<Gra*>  (books[i]));
+
+            plik << g << endl;
+        }
 
     }
     plik.close();
@@ -297,24 +337,24 @@ void PrzedmiotPeopleSave(baza zbior, const string& exitFile) // save to base peo
             }
             else
             {
-                /*if (s.find("G") != string::npos)
+                if (s.find("G") != string::npos)
                 {   
-                      Gra g=zbior[i].second[l];
-                      plik<<g;
+                      Gra g= *(dynamic_cast<Gra*>(zbior[i].second[l]));
+                      plik<<g<<endl;
 
-                }*/
-                /*if ( s.find("D")!=string::npos)
+                }
+                if ( s.find("D")!=string::npos)
                 {
-                      DVD d=zbior[i].second[l];
-                      plik<<d;
+                      DVD d= *(dynamic_cast<DVD*>(zbior[i].second[l]));
+                      plik<<d<<endl;
 
-                }*/
-                /*if ( s.find("C")!=string::npos)
+                }
+                if ( s.find("C")!=string::npos)
                {
-                     CD d=zbior[i].second[l];
-                     plik<<d;
+                     CD d= *(dynamic_cast<CD*>(zbior[i].second[l]));
+                     plik<<d<<endl;
 
-               }*/
+               }
             }
 
         }
@@ -353,30 +393,30 @@ vector<Przedmiot*> PrzedmiotGet(const string& fileName) // read from przedmiot f
             }
             else
             {
-                /*if (z[0]=='G')
+                if (z[0]=='G')
                 {
                      Gra* g = new Gra;
                     stringstream ss(s);
                 ss1 >>*g;
                 zbior.push_back(g);   
 
-                }*/
-                /*if (z[0]=='D')
+                }
+                if (z[0]=='D')
                 {
                     DVD* d = new DVD;
                 stringstream ss(s);
                 ss1 >>*d;
                 zbior.push_back(d);   
 
-                }*/
-                /*if (z[0] == 'C')
+                }
+                if (z[0] == 'C')
                 {
                    CD* d = new CD;
                     stringstream ss(s);
                     ss1 >> *d;
                     zbior.push_back(d);
 
-                }*/
+                }
             }
 
 
@@ -424,15 +464,15 @@ baza PrzedmiotPeopleGet(const string& exitFile)
                 }
                 else
                 {
-                    /*if (z[0]=='G')
+                    if (z[0]=='G')
                     {
                          Gra* g = new Gra;
                         
                     ss1 >>*g;
                     zbior.push_back(g);
 
-                    }*/
-                    /*if ( z[0]=='D')
+                    }
+                    if ( z[0]=='D')
                     {
                         DVD* d = new DVD;
                     
@@ -448,7 +488,7 @@ baza PrzedmiotPeopleGet(const string& exitFile)
                     zbior.push_back(d);
 
                     }
-                    if(z*/
+                    
                 }
             }
             else {
