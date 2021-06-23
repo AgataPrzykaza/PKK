@@ -6,7 +6,7 @@ void Menu::Admin(baza &zbior,vector<Przedmiot*> &books,vector<User*> &members)
 	
 	int option;
 	cout << "\t\t Administracja"<<endl;
-	cout << "\t\t Wybierz dzialanie"<<endl;
+	cout << " Wybierz dzialanie"<<endl;
 	cout << "1.Usun uzytkownika" << endl << "2.Zmien dane uzytkownika" << endl;
 	cout << "3.Dodaj przedmiot" << endl << "4.Usun przedmiot" << endl << "5.Modyfikuj dane przedmiotu"<<endl;
 	cout << "6.Wyjdz " << endl;
@@ -157,9 +157,10 @@ void Menu::Admin(baza &zbior,vector<Przedmiot*> &books,vector<User*> &members)
 
 User Menu::Login(vector<User*> members) //ok
 {
+	system("cls");
 	User zalogowany;
 	string email, haslo;
-	cout << "\t\t Zaloguj sie";
+	cout << "\t\t Zaloguj sie\n";
 	cout << "Podaj email: ";
 	cin >> email;
 	while (zalogowany.CheckEmail(email, members) != false)
@@ -210,34 +211,43 @@ void Menu::MyKonto(User person, vector< pair<User, vector<Przedmiot*>>>& issued,
 	cout << endl << "--------------------------------" << endl;
 	
 	Konto k;
-	k.MyBooks(person, issued);
 	
-	cout << "Czy chcesz oddac jakis przedmiot? T-tak N-nie" << endl;
-	char s;
-	cin >> s;
-	if (s == 'T')
+	if (k.MyBooks(person, issued)==1)
 	{
-		string id;
-		cout << "Podaj id przedmiotu ktory chcesz oddac";
-		cin >> id;
-		Przedmiot* p = getPrzedmiot(id, book);
-		k.Oddaj(&person, p, issued, book);
-		cout << "Przedmiot oddany!!!" << endl;
+		cout << "Czy chcesz oddac jakis przedmiot? T-tak N-nie" << endl;
+		char s;
+		cin >> s;
+		if (s == 'T')
+		{
+			string id;
+			cout << "Podaj id przedmiotu ktory chcesz oddac";
+			cin >> id;
+			Przedmiot* p = getPrzedmiot(id, book);
+			k.Oddaj(&person, p, issued, book);
+			cout << "Przedmiot oddany!!!" << endl;
+			cout << "Wcisnij enter by wyjsc";
+			if (cin.get())
+			{
+				return;
+			}
+		}
+		if (s == 'N')
+		{
+			cout << "Wcisnij enter by wyjsc";
+			if (cin.get())
+			{
+				return;
+			}
+		}
+	}
+	else {
 		cout << "Wcisnij enter by wyjsc";
-		if (cin.get())
+		if (getchar())
 		{
 			return;
 		}
 	}
-	if (s == 'N')
-	{
-		cout << "Wcisnij enter by wyjsc";
-		if (cin.get())
-		{
-			return;
-		}
-	}
-	return;
+	
 }
 
 void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<Przedmiot*>& book)
@@ -359,7 +369,8 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 	if (option == 2)
 	{
 		Konto me;
-		if (me.Books(person, issued) == 1)
+		bool  czy = me.Books(person, issued);
+		if ( czy== 1)
 		{
 			cout << "Chcesz oddac jakas ksiazke (T/N) ?" << endl;
 			cin >> k;
@@ -375,7 +386,7 @@ void Menu::Books(User person, vector< pair<User, vector<Przedmiot*>>>& issued, v
 
 			}
 		}
-		else
+		if(czy==0)
 		{
 			cout << "Brak wypozyczonych ksiazek\n";
 			cout << "Enter by wyjsc";
@@ -800,37 +811,37 @@ void Menu::Multimedia(User person, vector< pair<User, vector<Przedmiot*>>>& issu
 
 void Menu::Search(vector<Przedmiot*> books)
 {
-	char z;
+	char z,r;
 	cout << "\t\tWYSZUKIWANIE\n";
 	cout << "1.Ksiazek\n" << "2.Gier\n" << "3.DVD\n"<<"4.CD\n";
-	cin.get(z);
+	cin>>z;
 	Searching szukac;
 	if (z =='1')
 	{
 		cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
-		cin >> z;
-		if (z == '1')
+		cin >> r;
+		if (r == '1')
 		{
 			szukac.SearchByTitle('K',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '2')
+		if (r == '2')
 		{
 			szukac.SearchByAutor('K',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '3')
+		if (r == '3')
 		{
 			szukac.SearchByYear('K',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '4')
+		if (r == '4')
 		{
 			szukac.SearchByGenre('K',books);
 			cout << "Wyjscie-enter";
@@ -842,22 +853,22 @@ void Menu::Search(vector<Przedmiot*> books)
 	if (z == '2')
 	{
 		cout << "1-Tytul,2-Autor,3-Rok" << endl;
-		cin >> z;
-		if (z == '1')
+		cin >> r;
+		if (r== '1')
 		{
 			szukac.SearchByTitle('G',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '2')
+		if (r == '2')
 		{
 			szukac.SearchByAutor('G',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '3')
+		if (r == '3')
 		{
 			szukac.SearchByYear('G',books);
 			cout << "Wyjscie-enter";
@@ -870,29 +881,29 @@ void Menu::Search(vector<Przedmiot*> books)
 	if (z == '3')
 	{
 		cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
-		cin >> z;
-		if (z == '1')
+		cin >> r;
+		if (r == '1')
 		{
 			szukac.SearchByTitle('D',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '2')
+		if (r == '2')
 		{
 			szukac.SearchByAutor('D',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '3')
+		if (r == '3')
 		{
 			szukac.SearchByYear('D',books);
 			cout << "Wyjscie-enter";
 			if (cin.get())
 				return;
 		}
-		if (z == '4')
+		if (r == '4')
 		{
 			szukac.SearchByGenre('D',books);
 			cout << "Wyjscie-enter";
@@ -902,92 +913,83 @@ void Menu::Search(vector<Przedmiot*> books)
 	}
 	if (z == 4)
 	{
-		if (z == '1')
+
+		cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
+		cin >> r;
+		if (r == '1')
 		{
-			cout << "1-Tytul,2-Autor,3-Rok,4-Gatunek" << endl;
-			cin >> z;
-			if (z == '1')
-			{
-				szukac.SearchByTitle('C', books);
-				cout << "Wyjscie-enter";
-				if (cin.get())
-					return;
-			}
-			if (z == '2')
-			{
-				szukac.SearchByAutor('C', books);
-				cout << "Wyjscie-enter";
-				if (cin.get())
-					return;
-			}
-			if (z == '3')
-			{
-				szukac.SearchByYear('C', books);
-				cout << "Wyjscie-enter";
-				if (cin.get())
-					return;
-			}
-			if (z == '4')
-			{
-				szukac.SearchByGenre('C', books);
-				cout << "Wyjscie-enter";
-				if (cin.get())
-					return;
-			}
+			szukac.SearchByTitle('C', books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (r == '2')
+		{
+			szukac.SearchByAutor('C', books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (r == '3')
+		{
+			szukac.SearchByYear('C', books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
+		}
+		if (r == '4')
+		{
+			szukac.SearchByGenre('C', books);
+			cout << "Wyjscie-enter";
+			if (cin.get())
+				return;
 		}
 
+
 	}
-	if (z == '\n')
+
+	else
 	{
 		PokaNowe(books);
 		cout << "Wyjscie-enter";
 		if (cin.get())
 			return;
 	}
-	else
-	{
-		return;
-	}
-}
-
-User Panel1(baza &issued, vector<User*> &members,vector<Przedmiot*> books)
-{
-	Menu ja;
-	cout << "\t\t BIBLIOTEKA\n";
-	cout << "1.Zaloguj sie\n";
-	cout << "2.Zarejestruj sie\n";
-	cout << "3.Wyszukiwanie(tylko do wyswietlenia)\n";
-	int o;
-	cin >> o;
-	if (o == 1)
-	{
-		return ja.Login(members);
-
-	}
-	if (o == 2)
-	{
-		return ja.Register(members, issued);
-	}
-	if (o == 3)
-	{
-		ja.Search(books);
-		User u(0, "", "", "");
-		return u;
-	}
-	else
-	{
-		cout << " :( Nie ma takiej opcji\n";
-		User u(0, "", "", "");
-		return u;
-	}
+	
 	
 }
-//moze while(1) by caly czas program trwal i mozna wrocic
 
-void Panel2(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
-{
-	cout << "\t\t ZALOGOWANY\n";
-	cout << "1.Ksiazki\n2.Gry\n3.CD\n4.DVD\n5.Administracja\n5.Moje Konto\n";
-	cout << "6.Wyjdz";
-	
-}
+//User Panel1(baza &issued, vector<User*> &members,vector<Przedmiot*> books)
+//{
+//	Menu ja;
+//	cout << "\t\t BIBLIOTEKA\n";
+//	cout << "1.Zaloguj sie\n";
+//	cout << "2.Zarejestruj sie\n";
+//	cout << "3.Wyszukiwanie(tylko do wyswietlenia)\n";
+//	int o;
+//	cin >> o;
+//	if (o == 1)
+//	{
+//		return ja.Login(members);
+//
+//	}
+//	if (o == 2)
+//	{
+//		return ja.Register(members, issued);
+//	}
+//	if (o == 3)
+//	{
+//		ja.Search(books);
+//		User u(0, "", "", "");
+//		return u;
+//	}
+//	else
+//	{
+//		cout << " :( Nie ma takiej opcji\n";
+//		User u(0, "", "", "");
+//		return u;
+//	}
+//	
+//}
+////moze while(1) by caly czas program trwal i mozna wrocic
+//

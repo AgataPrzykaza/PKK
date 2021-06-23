@@ -3,7 +3,9 @@
 #include<fstream>
 #include<sstream>
 #include<stdlib.h>
+#include<Windows.h>
 #include"Nagłówek.h"
+
 using namespace std;
 
 typedef vector< pair<User, vector<Przedmiot*>>> baza;
@@ -13,7 +15,8 @@ void PeopleSave(const string& exitFile, vector<User*> users);
 void PrzedmiotSave(const string& exitFile, vector<Przedmiot*>books);
 void PokaNowe(vector<Przedmiot*> books)
 {
-    cout << "Nowo dodane!!\n";
+    system("cls");
+    cout << "\t\tNowo dodane!!\n";
     string s;
     for (int i = books.size()-1;i>books.size()-7; i--)
     {
@@ -24,6 +27,41 @@ void PokaNowe(vector<Przedmiot*> books)
 void PrzedmiotPeopleSave(baza zbior, const string& exitFile);
 vector<Przedmiot*> PrzedmiotGet(const string& fileName);
 baza PrzedmiotPeopleGet(const string& fileName);
+void Panel2(User u, baza& issued, vector<User*>& members, vector<Przedmiot*> book);
+
+User Panel1(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
+{
+    system("cls");
+    Menu ja;
+    cout << "\t\t BIBLIOTEKA\n";
+    cout << "1.Zaloguj sie\n";
+    cout << "2.Zarejestruj sie\n";
+    cout << "3.Wyszukiwanie(tylko do wyswietlenia)\n";
+    int o;
+    cin >> o;
+    if (o == 1)
+    {
+        return ja.Login(members);
+
+    }
+    if (o == 2)
+    {
+        return ja.Register(members, issued);
+    }
+    if (o == 3)
+    {
+        ja.Search(books);
+        User u(0, "", "", "");
+        return u;
+    }
+    else
+    {
+        cout << " :( Nie ma takiej opcji\n";
+        User u(0, "", "", "");
+        return u;
+    }
+
+}
 
 int main()
 {
@@ -44,6 +82,18 @@ int main()
 
    zbior = PrzedmiotPeopleGet("buff.txt");
 
+    User kolo = Panel1(zbior,u, ksiaz);
+    Panel2(kolo, zbior, u, ksiaz);
+
+   /*for (auto i : u)
+   {
+       cout<<i->getEmail()<<endl;
+   }*/
+   
+
+
+
+   //Program(zbior, u, ksiaz);
    //Panel1(zbior,u);
   // system("cls");
 
@@ -75,7 +125,8 @@ int main()
     //m.MyKonto(n, zbior);
 
     
-
+   
+   //Panel2(kolo, zbior, u, ksiaz);
 
     
    /* PeopleSave("users.txt", u);
@@ -129,6 +180,77 @@ int main()
 
     
 }
+
+void Panel2(User u,baza& issued, vector<User*>& members, vector<Przedmiot*> book)
+{
+    int o;
+    Menu m;
+    system("cls");
+    cout << "\t\t ZALOGOWANY\n";
+    cout << "1.Ksiazki\n2.Gry\n3.Multimedia\n4.Administracja\n5.Moje Konto\n";
+    cout << "6.Wyjdz";
+    cin >> o;
+    if (o == 1)
+    {
+        m.Books(u, issued, book);
+        cout << endl << "enter-wyjscie";
+        if(cin.get())
+        Panel2(u,issued, members, book);
+    }
+    if (o == 2)
+    {
+        m.Games(u, issued, book);
+        cout << endl << "enter-wyjscie";
+        if (cin.get())
+        Panel2(u, issued, members, book);
+    }
+    if (o == 3)
+    {
+        m.Multimedia(u, issued, book);
+        cout << endl << "enter-wyjscie";
+        if (cin.get())
+        Panel2(u, issued, members, book);
+    }
+    if (o == 4)
+    {
+        if (u.getID() < 15 && u.getID() > 0)
+        {
+            m.Admin(issued, book, members);
+            cout << endl << "enter-wyjscie";
+            cin.get();
+            if (cin.get())
+            Panel2(u, issued, members, book);
+            
+        }
+        else
+        {
+            cout << "Nie jestes administartorem!!" << endl;
+            cout << endl << "enter-wyjscie";
+            Sleep(1000);
+            if (cin.get())
+            Panel2(u, issued, members, book);
+        }
+    }
+    if(o==5)
+    {
+        m.MyKonto(u, issued, book);
+        cout << endl << "enter-wyjscie";
+        if (cin.get())
+        Panel2(u, issued, members, book);
+    }
+    if (o == 6)
+    {
+        
+       ;
+       Panel2(Panel1(issued, members, book), issued, members, book);
+    }
+    else
+    {
+        Panel2(Panel1(issued, members, book),issued, members, book);
+    }
+
+}
+
 
 vector<User*> PeopleGet(const string& fileName)  // read people file
 {
@@ -204,12 +326,18 @@ void PrzedmiotPeopleSave(baza zbior, const string& exitFile) // save to base peo
                       plik<<g;
 
                 }*/
-                /*if (s.find("C") != string::npos || s.find("D")!=string::npos)
+                /*if ( s.find("D")!=string::npos)
                 {
-                      DVD_CD d=zbior[i].second[l];
+                      DVD d=zbior[i].second[l];
                       plik<<d;
 
                 }*/
+                /*if ( s.find("C")!=string::npos)
+               {
+                     CD d=zbior[i].second[l];
+                     plik<<d;
+
+               }*/
             }
 
         }
@@ -256,12 +384,20 @@ vector<Przedmiot*> PrzedmiotGet(const string& fileName) // read from przedmiot f
                 zbior.push_back(g);   
 
                 }*/
-                /*if (z[0]=='C'||z[0]=='D')
+                /*if (z[0]=='D')
                 {
-                    DVD_CD* d = new DVD_CD;
+                    DVD* d = new DVD;
                 stringstream ss(s);
                 ss1 >>*d;
                 zbior.push_back(d);   
+
+                }*/
+                /*if (z[0] == 'C')
+                {
+                   CD* d = new CD;
+                    stringstream ss(s);
+                    ss1 >> *d;
+                    zbior.push_back(d);
 
                 }*/
             }
@@ -319,14 +455,23 @@ baza PrzedmiotPeopleGet(const string& exitFile)
                     zbior.push_back(g);
 
                     }*/
-                    /*if (z[0]=='C' || z[0]=='D')
+                    /*if ( z[0]=='D')
                     {
-                        DVD_CD* d = new DVD_CD;
+                        DVD* d = new DVD;
                     
                     ss1 >>*d;
                     zbior.push_back(d);
 
-                    }*/
+                    }
+                    if ( z[0]=='C')
+                    {
+                        CD* d = new CD;
+
+                    ss1 >>*d;
+                    zbior.push_back(d);
+
+                    }
+                    if(z*/
                 }
             }
             else {
@@ -348,3 +493,11 @@ baza PrzedmiotPeopleGet(const string& exitFile)
 
 
 }
+//void Program(baza& issued, vector<User*>& members, vector<Przedmiot*> book)
+//{   User u=Panel1(issued, members, book);
+//   Panel2(u, issued, members, book);
+//     
+//        
+//    
+//   
+//}

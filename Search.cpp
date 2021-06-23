@@ -4,7 +4,7 @@
 void Searching::SearchByTitle(char z,vector<Przedmiot*> books)
 {
 	string s;
-	cout << "Szunkanie po tytule" << endl;
+	cout << "\t\tSzunkanie po tytule" << endl;
 	cout << "Podaj tytul w cudzyslowach: ";
 	cin >> s;
 	bool b = 0;
@@ -34,7 +34,7 @@ void Searching::SearchByTitle(char z,vector<Przedmiot*> books)
 void Searching::SearchByAutor(char z,vector<Przedmiot*> books)
 {
 	string s;
-	cout << "Szunkanie po autorze" << endl;
+	cout << "\t\tSzunkanie po autorze" << endl;
 	cout << "Podaj autora: ";
 	cin >> s;
 	bool b = 0;
@@ -63,7 +63,7 @@ void Searching::SearchByAutor(char z,vector<Przedmiot*> books)
 void Searching::SearchByYear(char z,vector<Przedmiot*> books)
 {
 	int s;
-	cout << "Szunkanie po roku wydania" << endl;
+	cout << "\t\tSzunkanie po roku wydania" << endl;
 	cout << "Podaj rok: ";
 	cin >> s;
 	bool b = 0;
@@ -93,7 +93,7 @@ void Searching::SearchByYear(char z,vector<Przedmiot*> books)
 void Searching::SearchByGenre(char z,vector<Przedmiot*> books)
 {
 	string s;
-	cout << "Szunkanie po gatunku" << endl;
+	cout << "\t\tSzunkanie po gatunku" << endl;
 	cout << "Podaj gatunek: ";
 	cin >> s;
 	bool b = 0;

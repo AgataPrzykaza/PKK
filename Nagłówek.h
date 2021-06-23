@@ -153,7 +153,7 @@ class Konto :public User
 public:
 	Konto(int id, string name, string email, string haslo) :User(id, name, email, haslo) {};
 	Konto() :User(0, "", "", "") {};
-	void MyBooks(User person, vector< pair<User, vector<Przedmiot*>>>& issued);
+	bool MyBooks(User person, vector< pair<User, vector<Przedmiot*>>>& issued);
 	void Issue(User *person, Przedmiot* book, vector< pair<User, vector<Przedmiot*>>> &issued, vector<Przedmiot*>&);
 	//void Admin();
 	void Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>&);
@@ -192,5 +192,7 @@ public:
 int IdMaker(int);
 int LastId(vector<User*>& users);
 Przedmiot* getPrzedmiot(string id,vector<Przedmiot*> book);
-User Panel1(baza issued, vector<User*> members,vector<Przedmiot*> books);
+//User Panel1(baza issued, vector<User*> members,vector<Przedmiot*> books);
+//void Panel2(User u,baza& issued, vector<User*>& members, vector<Przedmiot*> books);
+//void Program(baza& issued, vector<User*>& members, vector<Przedmiot*> book);
 void PokaNowe(vector<Przedmiot*> books);

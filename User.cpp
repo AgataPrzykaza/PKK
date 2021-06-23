@@ -80,22 +80,31 @@ ostream& operator<<(ostream& s, const User& u)
 
 
 
-void Konto::MyBooks(User person,vector< pair<User,vector<Przedmiot*>>> &issued) //ok
+bool Konto::MyBooks(User person,vector< pair<User,vector<Przedmiot*>>> &issued) //ok
 {
 	
 	cout << "\t\tMoje wypozyczone " << endl;
 	
+
 	for (auto i:issued)
 	{
 		if (i.first.getID() == person.getID())
-		{
+		{   
+			if (i.second.size() == 0)
+			{
+				cout << "Brak!";
+				return 0;
+			}
 			for (auto l : i.second)
 			{
 				l->Show();
 			}
+			return 1;
 		}
 		
 	}
+	cout << "Brak!"<<endl;
+	return 0;
 
 }
 void Konto::Issue(User* person, Przedmiot* book, vector< pair<User,vector<Przedmiot*>>> &issued, vector<Przedmiot*> &books) //ok
@@ -260,13 +269,15 @@ void Konto::Modify(User& person, vector< pair<User, vector<Przedmiot*>>>& issued
 
 User Konto::Add(vector< pair<User, vector<Przedmiot*>>>& issued, vector<User*>& users) //ok
 {
+	system("cls");
 	int id;
 
 	User* newUser = new User;
 
 	string name,surname, email, haslo;
-	cout << "Nowy uzytkownik" << endl << "Imie i nazwisko: ";
-	getline(cin,name);
+	cout << "\t\tNowy uzytkownik" << endl << "Imie i nazwisko: ";
+	cin >> name>> surname;
+	name = name + " " + surname;
 	
 	cout << "Email: ";
 	cin >> email;
@@ -341,10 +352,12 @@ bool Konto::Books(User person, baza issued)
 				}
 				
 			}
+			return 1;
 		}
 
 	}
-	return 1;
+	
+	return 0;
 }
 
 bool Konto::Gry(User person, baza issued)
@@ -368,10 +381,11 @@ bool Konto::Gry(User person, baza issued)
 				}
 
 			}
+			return 1;
 		}
 
 	}
-	return 1;
+	return 0;
 }
 
 bool Konto::DVD(User person, baza issued)
@@ -395,10 +409,12 @@ bool Konto::DVD(User person, baza issued)
 				}
 
 			}
+			return 1;
 		}
 
 	}
-	return 1;
+	return 0;
+	
 }
 
 bool Konto::CD(User person, baza issued)
@@ -422,10 +438,12 @@ bool Konto::CD(User person, baza issued)
 				}
 
 			}
+			return 1;
 		}
 
 	}
-	return 1;
+	return 0;
+	
 }
 
 
