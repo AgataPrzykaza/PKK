@@ -63,6 +63,34 @@ User Panel1(baza& issued, vector<User*>& members, vector<Przedmiot*> books)
 
 }
 
+//baza Relacje(const string& fileName)
+//{
+//    ifstream plik(fileName);
+//
+//    string s;
+//    string id;
+//    baza zbior;
+//
+//
+//    if (plik.good())
+//    {
+//
+//        while (getline(plik, s))
+//        {
+//            
+//            stringstream ss(s);
+//            ss >> id;
+//
+//            if()
+//           
+//
+//        }
+//    }
+//
+//    plik.close();
+//
+//}
+
 int main()
 {
     baza zbior;
@@ -80,23 +108,19 @@ int main()
     cout << *u[4];
     cout << zbior[zbior.size() - 1].first;*/
 
-   zbior = PrzedmiotPeopleGet("buff.txt");
+   zbior = PrzedmiotPeopleGet("save.txt");
+   
 
     User kolo = Panel1(zbior,u, ksiaz);
     Panel2(kolo, zbior, u, ksiaz);
-
-   /*for (auto i : u)
-   {
-       cout<<i->getEmail()<<endl;
-   }*/
+    PrzedmiotPeopleSave(zbior, "save.txt");
+    PrzedmiotSave("przedmioty.txt", ksiaz);
+    PeopleSave("users.txt", u);
    
-
-
-
+   
    //Program(zbior, u, ksiaz);
    //Panel1(zbior,u);
   // system("cls");
-
 
   // PrzedmiotSave("book.txt", ksiaz);
    /*Konto ja;
@@ -104,42 +128,22 @@ int main()
    cout << zbior[1].second.size();
    ;*/
 
-
-
-
-
   /*  DVD d;
     d.Add(ksiaz);
     ksiaz[ksiaz.size() - 1]->Show();
    Przedmiot* nowy=ksiaz[ksiaz.size() - 1];
    cout << *dynamic_cast<DVD*>(nowy);*/
    // ksiaz[ksiaz.size() - 1]->Show();
-    
-    
-    
     ///*Ksiazka k;
     //k.Add(ksiaz);*/
 
     //User n = zbior[0].first;
     //Menu m;
     //m.MyKonto(n, zbior);
-
-    
-   
    //Panel2(kolo, zbior, u, ksiaz);
-
-    
    /* PeopleSave("users.txt", u);
     PrzedmiotSave("book.txt", ksiaz);
     PrzedmiotPeopleSave(zbior, "buff.txt");*/
-    
-    /*Ksiazka k; 
-    k.Modify(ksiaz[1]);
-    ksiaz[1]->Show();
-    k= *(dynamic_cast<Ksiazka*>(ksiaz[1]));
-    k.Show();*/
-    
-    
     //PrzedmiotSave("buff.txt", ksiaz);
     //PrzedmiotPeopleSave(zbior, "buff2.txt");
     //zbior= PrzedmiotPeopleGet("save.txt");
@@ -149,34 +153,7 @@ int main()
     //zbior.push_back(p);
     
     
-    Konto Jarek;
-  //  Jarek.Add(zbior, u);
-   
-    /*Jarek.Delete(u[u.size() - 1]->getID(), zbior, u);
-    cout << u.size();*/
-   // 
-    //Jarek.Issue(&j, ksiaz[0], zbior, ksiaz);
-
    // PrzedmiotPeopleSave(zbior, "save.txt");
-
-    
-
-    
-    //k.Modify(ksiaz[0]);
-    //k.Add(ksiaz);
-    //k.Delete(ksiaz);
-   // ksiaz[ksiaz.size() - 1]->Show();
-    //PrzedmiotSave("save.txt", ksiaz);
-    
-    
-
-   // PrzedmiotPeopleSave(zbior, "save.txt");
-   //PeopleSave("users.txt", u);
-    
-
-
-    //GETLINE W NAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
     
 }
@@ -241,12 +218,12 @@ void Panel2(User u,baza& issued, vector<User*>& members, vector<Przedmiot*> book
     if (o == 6)
     {
         
-       ;
+       
        Panel2(Panel1(issued, members, book), issued, members, book);
     }
     else
     {
-        Panel2(Panel1(issued, members, book),issued, members, book);
+        return;
     }
 
 }
@@ -493,6 +470,10 @@ baza PrzedmiotPeopleGet(const string& exitFile)
 
 
 }
+
+
+
+
 //void Program(baza& issued, vector<User*>& members, vector<Przedmiot*> book)
 //{   User u=Panel1(issued, members, book);
 //   Panel2(u, issued, members, book);

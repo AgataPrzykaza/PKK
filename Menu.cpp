@@ -812,6 +812,7 @@ void Menu::Multimedia(User person, vector< pair<User, vector<Przedmiot*>>>& issu
 void Menu::Search(vector<Przedmiot*> books)
 {
 	char z,r;
+	int kol;
 	cout << "\t\tWYSZUKIWANIE\n";
 	cout << "1.Ksiazek\n" << "2.Gier\n" << "3.DVD\n"<<"4.CD\n";
 	cin>>z;
@@ -824,29 +825,31 @@ void Menu::Search(vector<Przedmiot*> books)
 		{
 			szukac.SearchByTitle('K',books);
 			cout << "Wyjscie-enter";
-			if (cin.get())
+			cin >> kol;
 				return;
 		}
 		if (r == '2')
 		{
 			szukac.SearchByAutor('K',books);
 			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cin >> kol;
 		}
 		if (r == '3')
 		{
 			szukac.SearchByYear('K',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
 		}
 		if (r == '4')
 		{
 			szukac.SearchByGenre('K',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+			
+			cin >> kol;
+			return;
+			/*if (cin.get())
+				return;*/
 		}
 	}
 
@@ -857,23 +860,26 @@ void Menu::Search(vector<Przedmiot*> books)
 		if (r== '1')
 		{
 			szukac.SearchByTitle('G',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '2')
 		{
 			szukac.SearchByAutor('G',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '3')
 		{
 			szukac.SearchByYear('G',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		
 	}
@@ -885,30 +891,34 @@ void Menu::Search(vector<Przedmiot*> books)
 		if (r == '1')
 		{
 			szukac.SearchByTitle('D',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '2')
 		{
 			szukac.SearchByAutor('D',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '3')
 		{
 			szukac.SearchByYear('D',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '4')
 		{
 			szukac.SearchByGenre('D',books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 	}
 	if (z == 4)
@@ -919,29 +929,33 @@ void Menu::Search(vector<Przedmiot*> books)
 		if (r == '1')
 		{
 			szukac.SearchByTitle('C', books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '2')
 		{
 			szukac.SearchByAutor('C', books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
-				return;
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
+			return;
 		}
 		if (r == '3')
 		{
 			szukac.SearchByYear('C', books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
 				return;
 		}
 		if (r == '4')
 		{
 			szukac.SearchByGenre('C', books);
-			cout << "Wyjscie-enter";
-			if (cin.get())
+			cout << "Wyjscie- klawisz i enter";
+
+			cin >> kol;
 				return;
 		}
 
@@ -951,8 +965,9 @@ void Menu::Search(vector<Przedmiot*> books)
 	else
 	{
 		PokaNowe(books);
-		cout << "Wyjscie-enter";
-		if (cin.get())
+		cout << "Wyjscie- klawisz i enter";
+
+		cin >> kol;
 			return;
 	}
 	
